@@ -46,9 +46,9 @@ export interface WishCardData {
 export const WISH_CARDS: WishCardData[] = [
   {
     id: 'wish-1',
-    title: 'Keep Being You',
-    message: "Whenever you feel down, try to think positively. The world is always full of small joys waiting for you.",
-    tag: 'GOOD VIBES',
+    title: 'Bright Side',
+    message: "Whenever you feel a little down, look for the brighter side. The world is always full of quiet joys waiting to be found.",
+    tag: 'Choose Optimism',
   },
   {
     id: 'wish-2',
@@ -59,7 +59,7 @@ export const WISH_CARDS: WishCardData[] = [
   {
     id: 'wish-3',
     title: 'You Deserve Good Things',
-    message: 'More happy moments, more photos with more smiles, and more little things to look forward to.',
+    message: 'More happy moments, brighter smiles in every photo, and countless little things to look forward to.',
     tag: 'EVERYDAY JOY',
   },
 ];
@@ -76,7 +76,7 @@ And to be honest, I'm really happy every time I get to go out and watch movies w
 
 Have a lovely October 20th. Remember to eat well, take good care of your health, and always stay happy and joyful ^^`;
 
-export const SECRET_SIGNATURE = 'Made with care, just for you, Yen Ly.';
+export const SECRET_SIGNATURE = 'With all my warmest thoughts, always ♥';
 
 export const FLOWER_COLOR_THEMES: FlowerColorTheme[] = [
   {

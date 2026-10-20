@@ -486,7 +486,7 @@ export function FinalSurpriseStage({
       ctx.textAlign = 'center';
 
       const message =
-        "From the flowers you planted, I've gathered them into a little bouquet. I hope it brings a little more joy to your day.";
+        "I've gathered the flowers you planted into a bouquet, just for you. May it bring a gentle touch of joy to your day.";
       const nextY = drawWrappedText(ctx, message, canvas.width / 2, cardY + 92, cardW - 130, 50);
 
       // Subtle Divider Line
@@ -500,7 +500,7 @@ export function FinalSurpriseStage({
       // Handwritten Closing Line
       ctx.fillStyle = '#7B8870';
       ctx.font = '600 44px Caveat, cursive';
-      ctx.fillText('Made with care, just for you.', canvas.width / 2, nextY + 82);
+      ctx.fillText('Made with care, just for you, Ly.', canvas.width / 2, nextY + 82);
 
       // 11. Export PNG Blob & Trigger Download
       const blob: Blob | null = await new Promise((resolve) =>
@@ -707,7 +707,7 @@ export function FinalSurpriseStage({
               variants={itemVariants}
               style={{ marginBottom: '1.5rem' }}
             >
-              Made with care, just for you.
+              Made with care, just for you, Yen Ly.
             </motion.p>
 
             <motion.div

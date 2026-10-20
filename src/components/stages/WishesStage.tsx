@@ -54,7 +54,7 @@ export function WishesStage({ onNext, onBack }: WishesStageProps) {
           Little Wishes
         </h2>
         <p className="hero-description" style={{ marginBottom: '1.25rem' }}>
-          A few quiet thoughts kept for today, designed to bring a little extra warmth to your day.
+          A few quiet thoughts kept for today, written to bring some warmth to your heart.
         </p>
       </div>
 

@@ -52,13 +52,13 @@ export function WelcomeStage({ onEnterGarden }: WelcomeStageProps) {
       
 
       <motion.h1 id="welcome-title" className="hero-title" variants={itemVariants}>
-        A Small Gift For October 20th
+        A Little Garden for You
       </motion.h1>
 
         
 
       <motion.p className="handwritten-whisper" variants={itemVariants}>
-        A little garden, a little joy, just for you.
+        A quiet garden, a gentle joy, just for you.
       </motion.p>
 
       <motion.div variants={itemVariants}>

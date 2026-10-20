@@ -248,11 +248,11 @@ export function GardenStage({
                 </h2>
 
                 <p className="unlock-subtitle">
-                  One little wish for every flower.
+                  A wish tucked into every bloom.
                 </p>
 
                 <p className="unlock-message">
-                  These lilies are a little reflection of your name — so beautiful, graceful, and gentle. I hope you love them, as they were chosen with you in mind.
+                  These lilies carry the grace of your name — gentle, bright, and lovely. I hope they bring a smile to your face, as every bloom was planted with you in mind.
                 </p>
 
                 <div className="unlock-actions">
