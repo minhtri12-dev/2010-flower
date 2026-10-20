@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import { WISH_CARDS } from '../../types/garden';
 
 interface WishesStageProps {
@@ -11,7 +12,7 @@ export function WishesStage({ onNext, onBack }: WishesStageProps) {
   const shouldReduceMotion = useReducedMotion();
   const [activeCardId, setActiveCardId] = useState<string>(WISH_CARDS[0].id);
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 16 },
     visible: {
       opacity: 1,
@@ -29,7 +30,7 @@ export function WishesStage({ onNext, onBack }: WishesStageProps) {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 10 },
     visible: {
       opacity: 1,
