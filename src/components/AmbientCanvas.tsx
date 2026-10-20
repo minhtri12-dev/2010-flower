@@ -1,127 +1,169 @@
-import { useEffect, useRef } from 'react';
+import React, { useMemo } from 'react';
+import { motion } from 'framer-motion';
 
 interface Particle {
-  x: number;
-  y: number;
-  radius: number;
-  speedY: number;
-  speedX: number;
-  opacity: number;
-  pulseSpeed: number;
-  color: string;
+  id: number;
+  layer: 'far' | 'mid' | 'near';
   isPetal: boolean;
-  angle: number;
-  spinSpeed: number;
+  left: string;
+  size: number;
+  duration: number;
+  delay: number;
+  swayAmplitude: number;
+  rotationStart: number;
+  rotationEnd: number;
+  color: string;
+  opacity: number;
+  blur: string;
 }
 
-const PALETTE = ['#D3B77A', '#A8B59A', '#DFA89B', '#FFFFFF'];
+const COLORS = [
+  '#DFA89B', // Hồng đất
+  '#F3C6BC', // Hồng phấn nhẹ
+  '#D3B77A', // Vàng champagne
+  '#A8B59A', // Xanh sage
+];
 
-export function AmbientCanvas() {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+export const AmbientCanvas: React.FC = () => {
+  const particles = useMemo<Particle[]>(() => {
+    const totalCount = 42; // Mật độ dày dặn, sinh động
+    
+    return Array.from({ length: totalCount }).map((_, index) => {
+      const randLayer = (index % 10) / 10;
+      const layer: 'far' | 'mid' | 'near' =
+        randLayer < 0.4 ? 'far' : randLayer < 0.8 ? 'mid' : 'near';
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+      const size =
+        layer === 'far'
+          ? 5 + (index % 4)
+          : layer === 'mid'
+          ? 9 + (index % 6)
+          : 15 + (index % 7);
 
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const prefersReducedMotion = mediaQuery.matches;
+      const duration =
+        layer === 'far'
+          ? 20 + (index % 9)
+          : layer === 'mid'
+          ? 14 + (index % 7)
+          : 10 + (index % 5);
 
-    let animationFrameId = 0;
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
+      const opacity =
+        layer === 'far' ? 0.25 : layer === 'mid' ? 0.48 : 0.72;
 
-    const handleResize = () => {
-      if (!canvas) return;
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    };
+      const blur =
+        layer === 'far'
+          ? 'blur(1.5px)'
+          : layer === 'mid'
+          ? 'blur(0.3px)'
+          : 'blur(0px)';
 
-    window.addEventListener('resize', handleResize);
+      const swayAmplitude =
+        layer === 'far'
+          ? 20 + (index % 15)
+          : layer === 'mid'
+          ? 45 + (index % 25)
+          : 70 + (index % 35);
 
-    const particleCount = width < 640 ? 24 : 40;
-    const particles: Particle[] = Array.from({ length: particleCount }, (_, index) => {
-      const isPetal = index % 4 === 0;
       return {
-        x: Math.random() * width,
-        y: Math.random() * height,
-        radius: isPetal ? Math.random() * 4 + 3 : Math.random() * 1.6 + 0.8,
-        speedY: isPetal ? Math.random() * 0.24 + 0.1 : -(Math.random() * 0.18 + 0.05),
-        speedX: (Math.random() - 0.5) * 0.2,
-        opacity: Math.random() * 0.45 + 0.15,
-        pulseSpeed: Math.random() * 0.015 + 0.005,
-        color: PALETTE[index % PALETTE.length],
-        isPetal,
-        angle: Math.random() * Math.PI * 2,
-        spinSpeed: (Math.random() - 0.5) * 0.01,
+        id: index,
+        layer,
+        isPetal: index % 4 !== 0, // 75% là cánh hoa Ly, 25% là hạt phấn tròn
+        left: `${(index * 100) / totalCount + ((index * 7) % 5) - 2}%`,
+        size,
+        duration,
+        delay: -((index * 1.7) % 22), // Delay âm để vừa mở web ra là hoa đã rơi sẵn khắp màn hình
+        swayAmplitude,
+        rotationStart: (index * 45) % 360,
+        rotationEnd: ((index * 45) % 360) + (index % 2 === 0 ? 220 : -220),
+        color: COLORS[index % COLORS.length],
+        opacity,
+        blur,
       };
     });
-
-    const drawParticles = () => {
-      ctx.clearRect(0, 0, width, height);
-
-      for (const p of particles) {
-        ctx.save();
-        ctx.globalAlpha = Math.max(0.1, Math.min(0.65, p.opacity));
-
-        if (p.isPetal) {
-          ctx.translate(p.x, p.y);
-          ctx.rotate(p.angle);
-          ctx.fillStyle = p.color;
-          ctx.beginPath();
-          ctx.ellipse(0, 0, p.radius * 1.3, p.radius * 0.7, 0, 0, Math.PI * 2);
-          ctx.fill();
-        } else {
-          const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius * 2.5);
-          gradient.addColorStop(0, p.color);
-          gradient.addColorStop(1, 'rgba(247, 243, 234, 0)');
-          ctx.fillStyle = gradient;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius * 2.5, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        ctx.restore();
-
-        if (!prefersReducedMotion) {
-          p.x += p.speedX + Math.sin(p.angle) * 0.1;
-          p.y += p.speedY;
-          p.angle += p.spinSpeed;
-          p.opacity += Math.sin(Date.now() * p.pulseSpeed) * 0.002;
-
-          if (p.y < -20) p.y = height + 20;
-          if (p.y > height + 20) p.y = -20;
-          if (p.x < -20) p.x = width + 20;
-          if (p.x > width + 20) p.x = -20;
-        }
-      }
-
-      if (!prefersReducedMotion) {
-        animationFrameId = requestAnimationFrame(drawParticles);
-      }
-    };
-
-    drawParticles();
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(animationFrameId);
-    };
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
+    <div
+      className="pointer-events-none fixed inset-0 overflow-hidden"
+      style={{ zIndex: 1 }}
       aria-hidden="true"
-      style={{
-        position: 'absolute',
-        inset: 0,
-        width: '100%',
-        height: '100%',
-        pointerEvents: 'none',
-        zIndex: 2,
-      }}
-    />
+    >
+      {particles.map((p) => (
+        <motion.div
+          key={p.id}
+          style={{
+            position: 'absolute',
+            top: '-5%',
+            left: p.left,
+            width: p.size,
+            height: p.isPetal ? p.size * 1.45 : p.size,
+            filter: p.blur,
+            opacity: p.opacity,
+          }}
+          animate={{
+            y: ['0vh', '108vh'],
+            x: [
+              0,
+              p.swayAmplitude,
+              -p.swayAmplitude * 0.7,
+              p.swayAmplitude * 0.4,
+              0,
+            ],
+            rotate: [p.rotationStart, p.rotationEnd],
+          }}
+          transition={{
+            y: {
+              duration: p.duration,
+              repeat: Infinity,
+              ease: 'linear',
+              delay: p.delay,
+            },
+            x: {
+              duration: p.duration * 0.9,
+              repeat: Infinity,
+              ease: 'easeInOut',
+              delay: p.delay,
+            },
+            rotate: {
+              duration: p.duration,
+              repeat: Infinity,
+              ease: 'linear',
+              delay: p.delay,
+            },
+          }}
+        >
+          {p.isPetal ? (
+            <svg
+              viewBox="0 0 24 36"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              style={{ width: '100%', height: '100%' }}
+            >
+              <path
+                d="M12 0C6.5 8 2 16.5 2 24C2 30.5 6.5 36 12 36C17.5 36 22 30.5 22 24C22 16.5 17.5 8 12 0Z"
+                fill={p.color}
+              />
+              <path
+                d="M12 4V32"
+                stroke="#F7F3EA"
+                strokeWidth="0.8"
+                strokeOpacity="0.4"
+              />
+            </svg>
+          ) : (
+            <div
+              style={{
+                width: '100%',
+                height: '100%',
+                borderRadius: '9999px',
+                backgroundColor: p.color,
+              }}
+            />
+          )}
+        </motion.div>
+      ))}
+    </div>
   );
-}
+};
+
+export default AmbientCanvas;
