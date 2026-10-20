@@ -1,0 +1,943 @@
+:root {
+  /* Warm Botanical Design System Palette */
+  --color-ivory-warm: #F7F3EA;
+  --color-sage-green: #A8B59A;
+  --color-dusty-pink: #DFA89B;
+  --color-deep-olive: #7B8870;
+  --color-honey-gold: #D3B77A;
+  --color-dark-botanical: #343B30;
+
+  /* Surfaces & Borders */
+  --surface-paper: rgba(255, 253, 249, 0.85);
+  --surface-paper-elevated: rgba(168, 181, 154, 0.12);
+  --border-subtle: rgba(123, 136, 112, 0.2);
+  --border-accent: rgba(211, 183, 122, 0.45);
+  
+  /* Typography System */
+  --font-display: 'Gloock', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Onest', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-handwriting: 'Caveat', 'Comic Sans MS', cursive;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--color-ivory-warm);
+  color: var(--color-dark-botanical);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Main App Container & Natural Morning Botanical Background */
+.garden-app {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: 
+    radial-gradient(circle at 50% 15%, rgba(168, 181, 154, 0.18) 0%, transparent 60%),
+    radial-gradient(circle at 85% 85%, rgba(223, 168, 155, 0.14) 0%, transparent 50%),
+    linear-gradient(180deg, #F7F3EA 0%, #EFEADF 100%);
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Gentle Morning Light Orbs */
+.ambient-aura {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ambient-aura--top {
+  width: 360px;
+  height: 360px;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(168, 181, 154, 0.22), transparent 70%);
+}
+
+.ambient-aura--bottom {
+  width: 440px;
+  height: 440px;
+  bottom: -160px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(211, 183, 122, 0.14), transparent 70%);
+}
+
+/* Top Header Bar */
+.garden-header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.15rem 1.5rem 0.4rem;
+  max-width: 1120px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-deep-olive);
+  opacity: 0.9;
+}
+
+.brand-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-honey-gold);
+  box-shadow: 0 0 6px rgba(211, 183, 122, 0.6);
+}
+
+.stage-indicator-pill {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--color-dark-botanical);
+  background: var(--surface-paper-elevated);
+  border: 1px solid var(--border-subtle);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  letter-spacing: 0.06em;
+}
+
+/* Stage Viewport */
+.stage-viewport {
+  position: relative;
+  z-index: 5;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.25rem;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  overflow-y: auto;
+  scrollbar-width: none;
+  transition: max-width 0.4s ease;
+}
+
+.stage-viewport--wide {
+  max-width: 1040px;
+  overflow: hidden;
+}
+
+.stage-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+/* Warm Journal Welcome Card */
+.welcome-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2.25rem 1.75rem;
+  border-radius: 28px;
+  background: linear-gradient(
+    165deg,
+    rgba(255, 253, 249, 0.95) 0%,
+    rgba(247, 243, 234, 0.92) 100%
+  );
+  border: 1px solid var(--border-subtle);
+  box-shadow:
+    0 20px 50px rgba(52, 59, 48, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+}
+
+.botanical-frame {
+  position: relative;
+  width: 156px;
+  height: 156px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eyebrow-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-deep-olive);
+  margin-bottom: 0.9rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(168, 181, 154, 0.15);
+  border: 1px solid rgba(168, 181, 154, 0.3);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.15rem, 6vw, 3.35rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--color-dark-botanical);
+  margin-bottom: 1rem;
+}
+
+.hero-description {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  line-height: 1.65;
+  color: #556050;
+  max-width: 400px;
+  margin-bottom: 1.75rem;
+}
+
+.handwritten-whisper {
+  font-family: var(--font-handwriting);
+  font-size: 1.4rem;
+  color: #7B6B5D;
+  opacity: 0.95;
+  margin-bottom: 1.65rem;
+  transform: rotate(-1.5deg);
+}
+
+/* Deep Olive Primary Button */
+.btn-enter-garden {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #F7F3EA;
+  background: var(--color-deep-olive);
+  border: 1px solid rgba(123, 136, 112, 0.6);
+  padding: 0.95rem 2.1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(123, 136, 112, 0.25);
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-enter-garden:hover {
+  transform: translateY(-2px);
+  background: #68755E;
+  box-shadow: 0 12px 28px rgba(123, 136, 112, 0.35);
+}
+
+.btn-enter-garden:active {
+  transform: translateY(0);
+}
+
+.btn-enter-garden:focus-visible {
+  outline: 2px solid var(--color-sage-green);
+  outline-offset: 4px;
+}
+
+/* Secondary Button */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-dark-botanical);
+  background: rgba(168, 181, 154, 0.16);
+  border: 1px solid var(--border-subtle);
+  padding: 0.75rem 1.4rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(168, 181, 154, 0.28);
+}
+
+/* ==========================================
+   STAGE 2: WARM BOTANICAL GARDEN STYLES
+   ========================================== */
+.garden-stage-shell {
+  width: 100%;
+  height: 100%;
+  max-height: 680px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.garden-hud-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.65rem 1.15rem;
+  border-radius: 999px;
+  background: rgba(255, 253, 249, 0.9);
+  border: 1px solid var(--border-subtle);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(52, 59, 48, 0.06);
+}
+
+.garden-counter-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  color: var(--color-dark-botanical);
+  white-space: nowrap;
+}
+
+.garden-counter-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-sage-green);
+  box-shadow: 0 0 6px rgba(168, 181, 154, 0.8);
+}
+
+.garden-counter-text strong {
+  color: var(--color-deep-olive);
+  font-weight: 600;
+  margin-left: 0.2rem;
+}
+
+.garden-progress-track {
+  flex: 1;
+  max-width: 240px;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(168, 181, 154, 0.25);
+  overflow: hidden;
+}
+
+.garden-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--color-sage-green) 0%,
+    var(--color-dusty-pink) 100%
+  );
+}
+
+.garden-reopen-btn {
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: #F7F3EA;
+  background: var(--color-deep-olive);
+  border: none;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.garden-reopen-btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+/* Warm Interactive Garden Bed */
+.garden-interactive-bed {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  min-height: 390px;
+  border-radius: 28px;
+  overflow: hidden;
+  cursor: crosshair;
+  touch-action: manipulation;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(168, 181, 154, 0.18) 0%, transparent 60%),
+    radial-gradient(circle at 18% 82%, rgba(223, 168, 155, 0.12) 0%, transparent 50%),
+    linear-gradient(180deg, #F4EFE6 0%, #EAE3D6 75%, #E2DAD0 100%);
+  border: 1px solid var(--border-subtle);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 20px 50px rgba(52, 59, 48, 0.08);
+}
+
+.garden-interactive-bed.is-complete {
+  cursor: default;
+}
+
+.garden-mist-layer {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 75%,
+    rgba(255, 255, 255, 0.4) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.garden-ground-curves {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 40%;
+  pointer-events: none;
+}
+
+.garden-hills-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Prompts & Whispers */
+.garden-empty-prompt {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1.5rem;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.garden-prompt-ring {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px dashed var(--color-deep-olive);
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.garden-prompt-title {
+  font-family: var(--font-sans);
+  font-size: 0.96rem;
+  font-weight: 400;
+  color: var(--color-dark-botanical);
+  margin-bottom: 0.35rem;
+}
+
+.garden-prompt-whisper {
+  font-family: var(--font-handwriting);
+  font-size: 1.3rem;
+  color: #7B6B5D;
+}
+
+.garden-status-whisper {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-handwriting);
+  font-size: 1.2rem;
+  color: #68755E;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 4;
+}
+
+.garden-flowers-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.planted-flower-anchor {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.flower-ground-ripple {
+  position: absolute;
+  left: -18px;
+  top: -7px;
+  width: 36px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid var(--color-sage-green);
+  pointer-events: none;
+}
+
+.planted-flower-sway {
+  position: absolute;
+  left: -60px;
+  top: -145px;
+  width: 120px;
+  height: 155px;
+  transform-origin: 60px 145px;
+  pointer-events: none;
+}
+
+.planted-flower-svg {
+  overflow: visible;
+  filter: drop-shadow(0 4px 10px rgba(52, 59, 48, 0.15));
+}
+
+/* Unlock Modal (20/20 Flowers) */
+.garden-unlock-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  background: rgba(52, 59, 48, 0.35);
+  backdrop-filter: blur(6px);
+}
+
+.garden-unlock-card {
+  width: 100%;
+  max-width: 460px;
+  padding: 2rem 1.65rem 1.75rem;
+  border-radius: 26px;
+  text-align: center;
+  background: linear-gradient(
+    165deg,
+    rgba(255, 253, 249, 0.98) 0%,
+    rgba(247, 243, 234, 0.96) 100%
+  );
+  border: 1px solid var(--border-accent);
+  box-shadow: 0 24px 60px rgba(52, 59, 48, 0.15);
+}
+
+.unlock-emblem {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.unlock-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.75rem, 4.5vw, 2.35rem);
+  line-height: 1.18;
+  color: var(--color-dark-botanical);
+  margin-bottom: 0.45rem;
+}
+
+.unlock-subtitle {
+  font-family: var(--font-handwriting);
+  font-size: 1.45rem;
+  color: var(--color-deep-olive);
+  margin-bottom: 1rem;
+}
+
+.unlock-message {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: #556050;
+  margin-bottom: 1.65rem;
+}
+
+.unlock-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.unlock-admire-link {
+  background: transparent;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: #7B6B5D;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ==========================================
+   PHẦN 1: LITTLE WISHES (Journal Cards)
+   ========================================== */
+.wishes-stage-shell {
+  width: 100%;
+  max-width: 620px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.25rem;
+}
+
+.stage-header-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wishes-cards-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.wish-card-item {
+  width: 100%;
+  text-align: left;
+  padding: 1.15rem 1.35rem;
+  border-radius: 20px;
+  background: var(--surface-paper);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+
+.wish-card-item.is-active {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--color-deep-olive);
+  box-shadow: 0 10px 30px rgba(52, 59, 48, 0.08);
+}
+
+.wish-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+
+.wish-tag {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--color-deep-olive);
+  text-transform: uppercase;
+}
+
+.wish-card-icon {
+  color: var(--color-dusty-pink);
+}
+
+.wish-card-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--color-dark-botanical);
+  margin-bottom: 0.3rem;
+}
+
+.wish-card-message {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 300;
+  line-height: 1.55;
+  color: #556050;
+}
+
+.stage-action-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  justify-content: center;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+
+/* ==========================================
+   PHẦN 2: THE SECRET NOTE (Botanical Envelope)
+   ========================================== */
+.secret-note-shell {
+  width: 100%;
+  max-width: 620px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.envelope-viewport {
+  width: 100%;
+  min-height: 310px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.envelope-card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  padding: 2.5rem 1.75rem 2rem;
+  border-radius: 24px;
+  background: var(--surface-paper);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 16px 40px rgba(52, 59, 48, 0.08);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.envelope-flap-graphic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background: linear-gradient(135deg, rgba(168, 181, 154, 0.15) 0%, transparent 100%);
+  clip-path: polygon(0 0, 50% 65%, 100% 0);
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  pointer-events: none;
+}
+
+.envelope-wax-seal {
+  margin-bottom: 1.25rem;
+  filter: drop-shadow(0 4px 8px rgba(52, 59, 48, 0.15));
+}
+
+.envelope-text-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.letter-paper-card {
+  width: 100%;
+  max-width: 500px;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  background: #FFFDF9;
+  color: var(--color-dark-botanical);
+  border: 1px solid var(--border-accent);
+  box-shadow: 0 20px 50px rgba(52, 59, 48, 0.12);
+  overflow: hidden;
+}
+
+.letter-inner-scroll {
+  flex: 1;
+  padding: 1.75rem 1.75rem 1rem;
+  overflow-y: auto;
+  text-align: left;
+  scrollbar-width: thin;
+}
+
+.letter-header-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.15rem;
+  opacity: 0.8;
+}
+
+.letter-date-stamp {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-deep-olive);
+}
+
+.letter-body-text {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 0.94rem;
+  line-height: 1.7;
+  color: var(--color-dark-botanical);
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+}
+
+.letter-signature-block {
+  margin-top: 1.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed rgba(123, 136, 112, 0.3);
+}
+
+.letter-signoff-handwriting {
+  font-family: var(--font-handwriting);
+  font-size: 1.5rem;
+  color: var(--color-deep-olive);
+}
+
+.letter-actions-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: rgba(247, 243, 234, 0.9);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.letter-actions-bar .btn-secondary {
+  color: var(--color-dark-botanical);
+  background: rgba(168, 181, 154, 0.2);
+  border-color: var(--border-subtle);
+}
+
+
+/* ==========================================
+   PHẦN 3: ONE LAST SURPRISE
+   ========================================== */
+.final-surprise-card {
+  max-width: 520px;
+}
+
+.final-bouquet-frame {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* ==========================================
+   NAVIGATION DOCK
+   ========================================== */
+.nav-dock-wrapper {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  padding: 0.4rem 1rem 1.15rem;
+}
+
+.nav-dock {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(255, 253, 249, 0.85);
+  border: 1px solid var(--border-subtle);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(52, 59, 48, 0.08);
+}
+
+.nav-step-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: transparent;
+  border: none;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  color: #7B6B5D;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.nav-step-btn:hover {
+  color: var(--color-dark-botanical);
+}
+
+.nav-step-btn.is-active {
+  color: var(--color-dark-botanical);
+  background: rgba(168, 181, 154, 0.22);
+}
+
+.nav-step-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #7B6B5D;
+  transition: all 0.3s ease;
+}
+
+.nav-step-btn.is-active .nav-step-dot {
+  background-color: var(--color-deep-olive);
+  box-shadow: 0 0 6px rgba(123, 136, 112, 0.8);
+  transform: scale(1.15);
+}
+
+.nav-step-label {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .welcome-card {
+    padding: 2.75rem 2.5rem;
+  }
+
+  .nav-step-label {
+    display: inline;
+  }
+
+  .garden-unlock-card {
+    padding: 2.35rem 2.25rem 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
