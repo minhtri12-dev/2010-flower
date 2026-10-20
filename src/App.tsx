@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { GARDEN_STAGES } from './types/garden';
 import type { StageId, PlantedFlower } from './types/garden';
@@ -16,19 +16,57 @@ const MAX_GARDEN_FLOWERS = 20;
 export function App() {
   const [currentStage, setCurrentStage] = useState<StageId>('welcome');
   const [plantedFlowers, setPlantedFlowers] = useState<PlantedFlower[]>([]);
+  const [unlockedStages, setUnlockedStages] = useState<StageId[]>(['welcome']);
 
   const currentIndex = GARDEN_STAGES.findIndex((s) => s.id === currentStage);
   const activeStageMeta = GARDEN_STAGES[currentIndex] || GARDEN_STAGES[0];
 
-  const goToStage = useCallback((stageId: StageId) => {
+  const unlockStage = useCallback((stageId: StageId) => {
+    setUnlockedStages((prev) =>
+      prev.includes(stageId) ? prev : [...prev, stageId]
+    );
+  }, []);
+
+  // Automatically unlock 'wishes' as soon as 20 flowers are planted
+  useEffect(() => {
+    if (plantedFlowers.length >= MAX_GARDEN_FLOWERS) {
+      unlockStage('wishes');
+    }
+  }, [plantedFlowers.length, unlockStage]);
+
+  // Safety guard: prevent accessing post-garden stages if fewer than 20 flowers exist
+  useEffect(() => {
+    const requiresCompletedGarden =
+      currentStage === 'wishes' ||
+      currentStage === 'secret-note' ||
+      currentStage === 'final-surprise';
+
+    if (requiresCompletedGarden && plantedFlowers.length < MAX_GARDEN_FLOWERS) {
+      setCurrentStage('garden');
+    }
+  }, [currentStage, plantedFlowers.length]);
+
+  const goToStage = useCallback(
+    (stageId: StageId) => {
+      if (!unlockedStages.includes(stageId)) return;
+      setCurrentStage(stageId);
+    },
+    [unlockedStages]
+  );
+
+  const advanceToStage = useCallback((stageId: StageId) => {
+    setUnlockedStages((prev) =>
+      prev.includes(stageId) ? prev : [...prev, stageId]
+    );
     setCurrentStage(stageId);
   }, []);
 
   const goToNextStage = useCallback(() => {
     if (currentIndex < GARDEN_STAGES.length - 1) {
-      setCurrentStage(GARDEN_STAGES[currentIndex + 1].id);
+      const nextId = GARDEN_STAGES[currentIndex + 1].id;
+      advanceToStage(nextId);
     }
-  }, [currentIndex]);
+  }, [currentIndex, advanceToStage]);
 
   const goToPreviousStage = useCallback(() => {
     if (currentIndex > 0) {
@@ -47,6 +85,7 @@ export function App() {
 
   const handleResetGarden = useCallback(() => {
     setPlantedFlowers([]);
+    setUnlockedStages(['welcome', 'garden']);
     setCurrentStage('garden');
   }, []);
 
@@ -60,7 +99,7 @@ export function App() {
       <header className="garden-header">
         <div className="brand-mark">
           <span className="brand-dot" />
-          <span> HAPPY VIETNAMESE WOMEN'S DAY · 20.10</span>
+          <span>Happy Vietnamese Women's Day · 20.10</span>
         </div>
         <div className="stage-indicator-pill">
           {activeStageMeta.stepNumber} / 05 · {activeStageMeta.label}
@@ -76,33 +115,33 @@ export function App() {
           {currentStage === 'welcome' ? (
             <WelcomeStage
               key="welcome"
-              onEnterGarden={() => goToStage('garden')}
+              onEnterGarden={() => advanceToStage('garden')}
             />
           ) : currentStage === 'garden' ? (
             <GardenStage
               key="garden"
               flowers={plantedFlowers}
               onPlantFlower={handlePlantFlower}
-              onContinue={() => goToStage('wishes')}
+              onContinue={() => advanceToStage('wishes')}
             />
           ) : currentStage === 'wishes' ? (
             <WishesStage
               key="wishes"
-              onNext={() => goToStage('secret-note')}
-              onBack={() => goToStage('garden')}
+              onNext={() => advanceToStage('secret-note')}
+              onBack={() => setCurrentStage('garden')}
             />
           ) : currentStage === 'secret-note' ? (
             <SecretNoteStage
               key="secret-note"
-              onNext={() => goToStage('final-surprise')}
-              onBack={() => goToStage('wishes')}
+              onNext={() => advanceToStage('final-surprise')}
+              onBack={() => setCurrentStage('wishes')}
             />
           ) : currentStage === 'final-surprise' ? (
             <FinalSurpriseStage
               key="final-surprise"
               plantedFlowers={plantedFlowers}
               onRestartGarden={handleResetGarden}
-              onBack={() => goToStage('secret-note')}
+              onBack={() => setCurrentStage('secret-note')}
             />
           ) : (
             <StagePlaceholder
@@ -121,6 +160,7 @@ export function App() {
 
       <NavigationDock
         currentStage={currentStage}
+        unlockedStages={unlockedStages}
         onSelectStage={goToStage}
       />
     </div>

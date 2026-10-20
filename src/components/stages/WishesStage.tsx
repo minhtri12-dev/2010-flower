@@ -49,7 +49,7 @@ export function WishesStage({ onNext, onBack }: WishesStageProps) {
       aria-label="Little Wishes for October 20th"
     >
       <div className="stage-header-block">
-        <span className="eyebrow-badge">CHAPTER 03 · THOUGHTFUL NOTES</span>
+          
         <h2 className="hero-title" style={{ fontSize: 'clamp(1.85rem, 5vw, 2.6rem)' }}>
           Little Wishes
         </h2>

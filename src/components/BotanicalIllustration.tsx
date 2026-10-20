@@ -1,4 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion';
+import { FLOWER_COLOR_THEMES } from '../types/garden';
+import { LilyFlowerHead } from './PlantedFlowerSvg';
 
 export function BotanicalIllustration() {
   const shouldReduceMotion = useReducedMotion();
@@ -26,73 +28,44 @@ export function BotanicalIllustration() {
         }}
       >
         <defs>
-          <radialGradient id="journalLilyPetal" cx="50%" cy="35%" r="65%">
-            <stop offset="0%" stopColor="#FFFDF9" stopOpacity="0.98" />
-            <stop offset="55%" stopColor="#DFA89B" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#A8B59A" stopOpacity="0.4" />
-          </radialGradient>
-
-          <linearGradient id="stemOlive" x1="80" y1="88" x2="80" y2="148" gradientUnits="userSpaceOnUse">
+          <linearGradient id="stemOliveWelcome" x1="80" y1="78" x2="80" y2="148" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#7B8870" />
-            <stop offset="100%" stopColor="#A8B59A" stopOpacity="0.5" />
+            <stop offset="100%" stopColor="#A8B59A" stopOpacity="0.45" />
           </linearGradient>
-
-          <radialGradient id="coreGold" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#FFFDF9" />
-            <stop offset="100%" stopColor="#D3B77A" />
-          </radialGradient>
         </defs>
 
-        {/* Outer Warm Botanical Halos */}
-        <circle cx="80" cy="74" r="54" stroke="#D3B77A" strokeOpacity="0.3" strokeWidth="1" strokeDasharray="3 5" />
-        <circle cx="80" cy="74" r="42" stroke="#A8B59A" strokeOpacity="0.25" strokeWidth="1" />
+        {/* Warm Botanical Journal Halos */}
+        <circle cx="80" cy="72" r="56" stroke="#D3B77A" strokeOpacity="0.35" strokeWidth="1" strokeDasharray="3 5" />
+        <circle cx="80" cy="72" r="44" stroke="#A8B59A" strokeOpacity="0.28" strokeWidth="1" />
 
-        {/* Stem & Lanceolate Leaves */}
-        <path d="M80 92C80 112 79 128 80 146" stroke="url(#stemOlive)" strokeWidth="2" strokeLinecap="round" />
-        <path d="M80 118C68 116 54 108 52 98C64 98 74 106 80 118Z" fill="#A8B59A" fillOpacity="0.45" stroke="#7B8870" strokeOpacity="0.4" strokeWidth="0.9" />
-        <path d="M80 124C92 122 106 114 108 104C96 104 86 112 80 124Z" fill="#DFA89B" fillOpacity="0.4" stroke="#7B8870" strokeOpacity="0.4" strokeWidth="0.9" />
+        {/* Slender Stem & Lanceolate Leaves */}
+        <path d="M80 82C80 108 79 126 80 146" stroke="url(#stemOliveWelcome)" strokeWidth="2.2" strokeLinecap="round" />
+        <path d="M80 120C65 114 50 102 48 88C61 92 73 104 80 120Z" fill="#A8B59A" fillOpacity="0.52" stroke="#7B8870" strokeOpacity="0.5" strokeWidth="0.9" />
+        <path d="M80 126C95 120 110 108 112 94C99 98 87 110 80 126Z" fill="#7B8870" fillOpacity="0.38" stroke="#7B8870" strokeOpacity="0.5" strokeWidth="0.9" />
 
-        {/* 6 Characteristic Lily Petals */}
-        <g transform="translate(80, 72)">
-          {/* 3 Outer Petals */}
-          {[-45, 0, 45].map((deg, idx) => (
-            <path
-              key={`welcome-outer-${idx}`}
-              d="M0 6 C-15 -14 -20 -36 0 -54 C20 -36 15 -14 0 6 Z"
-              fill="#FFFDF9"
-              fillOpacity="0.88"
-              stroke="#DFA89B"
-              strokeWidth="0.8"
-              transform={`rotate(${deg})`}
-            />
-          ))}
-
-          {/* 3 Inner Petals */}
-          {[-22, 22, 180].map((deg, idx) => (
-            <path
-              key={`welcome-inner-${idx}`}
-              d="M0 4 C-12 -12 -16 -30 0 -46 C16 -30 12 -12 0 4 Z"
-              fill="url(#journalLilyPetal)"
-              transform={`rotate(${deg})`}
-            />
-          ))}
-
-          {/* Long Stamens & Center Anthers */}
-          {[-28, -14, 0, 14, 28].map((deg, idx) => (
-            <g key={`welcome-stamen-${idx}`} transform={`rotate(${deg})`}>
-              <line x1="0" y1="0" x2="0" y2="-28" stroke="#D3B77A" strokeWidth="0.9" />
-              <circle cx="0" cy="-29" r="2" fill="#7B8870" />
-            </g>
-          ))}
-
-          <circle cx="0" cy="0" r="4.5" fill="url(#coreGold)" />
+        {/* Side Lily Bud Accent */}
+        <g transform="translate(56, 78) rotate(-28) scale(0.55)">
+          <LilyFlowerHead
+            idPrefix="welcome-bud"
+            variant="lily-bud"
+            colorTheme={FLOWER_COLOR_THEMES[1]}
+          />
         </g>
 
-        {/* Starlight Accents */}
-        <circle cx="48" cy="34" r="2" fill="#D3B77A" />
-        <circle cx="116" cy="36" r="1.5" fill="#FFFDF9" />
-        <circle cx="122" cy="92" r="2" fill="#DFA89B" />
+        {/* Main Blooming Lily Emblem */}
+        <g transform="translate(80, 76) scale(1.12)">
+          <LilyFlowerHead
+            idPrefix="welcome-hero"
+            variant="lily-open"
+            colorTheme={FLOWER_COLOR_THEMES[0]}
+          />
+        </g>
+
+        {/* Honey Gold Botanical Motes */}
+        <circle cx="44" cy="36" r="2" fill="#D3B77A" />
+        <circle cx="118" cy="38" r="1.6" fill="#DFA89B" />
+        <circle cx="122" cy="88" r="1.8" fill="#D3B77A" />
       </motion.svg>
     </div>
   );
-} 
+}

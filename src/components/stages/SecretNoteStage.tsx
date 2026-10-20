@@ -23,7 +23,7 @@ export function SecretNoteStage({ onNext, onBack }: SecretNoteStageProps) {
       aria-label="The Secret Note"
     >
       <div className="stage-header-block">
-        <span className="eyebrow-badge">CHAPTER 04 · SEALED WITH CARE</span>
+     
         <h2 className="hero-title" style={{ fontSize: 'clamp(1.85rem, 5vw, 2.6rem)' }}>
           The Secret Note
         </h2>

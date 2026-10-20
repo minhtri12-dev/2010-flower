@@ -18,6 +18,7 @@ export interface FlowerColorTheme {
   id: string;
   primary: string;
   secondary: string;
+  accent: string;
   core: string;
   glow: string;
 }
@@ -45,7 +46,7 @@ export interface WishCardData {
 export const WISH_CARDS: WishCardData[] = [
   {
     id: 'wish-1',
-    title: 'Always Love Your Life',
+    title: 'Keep Being You',
     message: "Whenever you feel down, try to think positively. The world is always full of small joys waiting for you.",
     tag: 'GOOD VIBES',
   },
@@ -75,36 +76,40 @@ And to be honest, I'm really happy every time I get to go out and watch movies w
 
 Have a lovely October 20th. Remember to eat well, take good care of your health, and always stay happy and joyful ^^`;
 
-export const SECRET_SIGNATURE = 'Made with care, just for you, Ly.';
+export const SECRET_SIGNATURE = 'Made with care, just for you, Yen Ly.';
 
 export const FLOWER_COLOR_THEMES: FlowerColorTheme[] = [
   {
     id: 'dusty-rose-lily',
     primary: '#DFA89B',
     secondary: '#FFFDF9',
+    accent: '#C9897B',
     core: '#D3B77A',
-    glow: 'rgba(223, 168, 155, 0.35)',
+    glow: 'rgba(223, 168, 155, 0.32)',
   },
   {
-    id: 'sage-cream-lily',
-    primary: '#F2D6CE',
+    id: 'blush-cream-lily',
+    primary: '#ECC3B8',
     secondary: '#FFFDF9',
+    accent: '#D49586',
     core: '#D3B77A',
-    glow: 'rgba(242, 214, 206, 0.35)',
+    glow: 'rgba(236, 195, 184, 0.34)',
   },
   {
-    id: 'peach-gold-lily',
-    primary: '#E5B8AE',
-    secondary: '#FFFDF9',
-    core: '#D3B77A',
-    glow: 'rgba(229, 184, 174, 0.35)',
-  },
-  {
-    id: 'ivory-pure-lily',
+    id: 'warm-ivory-lily',
     primary: '#FFFDF9',
-    secondary: '#F2D6CE',
+    secondary: '#F3DFD8',
+    accent: '#D3B77A',
     core: '#7B8870',
-    glow: 'rgba(255, 253, 249, 0.4)',
+    glow: 'rgba(211, 183, 122, 0.28)',
+  },
+  {
+    id: 'peach-champagne-lily',
+    primary: '#E6B5A6',
+    secondary: '#FFFDF9',
+    accent: '#C88B7A',
+    core: '#D3B77A',
+    glow: 'rgba(230, 181, 166, 0.32)',
   },
 ];
 
@@ -113,12 +118,12 @@ export const GARDEN_STAGES: StageMetadata[] = [
     id: 'welcome',
     stepNumber: '01',
     label: 'Welcome',
-    subtitle: 'A quiet threshold into the evening garden',
+    subtitle: 'A quiet threshold into the morning garden',
   },
   {
     id: 'garden',
     stepNumber: '02',
-    label: 'The Garden',
+    label: 'Garden',
     subtitle: 'Interactive botanical blooms awaiting your touch',
   },
   {
@@ -136,7 +141,7 @@ export const GARDEN_STAGES: StageMetadata[] = [
   {
     id: 'final-surprise',
     stepNumber: '05',
-    label: 'One Last Surprise',
+    label: 'Last Surprise',
     subtitle: 'A keepsake bloom to carry with you',
   },
 ];

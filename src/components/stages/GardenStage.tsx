@@ -6,7 +6,7 @@ import type { PlantedFlower, FlowerVariant } from '../../types/garden';
 import { PlantedFlowerSvg } from '../PlantedFlowerSvg';
 
 const TARGET_FLOWERS = 20;
-const VARIANTS: FlowerVariant[] = ['camellia', 'lotus', 'cosmos', 'bellflower'];
+const VARIANTS: FlowerVariant[] = ['lily', 'lily-open', 'lily', 'lily-open', 'lily-bud'];
 
 interface GardenStageProps {
   flowers: PlantedFlower[];
@@ -31,6 +31,12 @@ export function GardenStage({
   const progressPercent = Math.min(100, (plantedCount / TARGET_FLOWERS) * 100);
 
   useEffect(() => {
+    if (plantedCount === 0) {
+      hasTriggeredUnlockRef.current = false;
+      setIsUnlockedModalOpen(false);
+      return;
+    }
+
     if (plantedCount >= TARGET_FLOWERS && !hasTriggeredUnlockRef.current) {
       hasTriggeredUnlockRef.current = true;
       const timer = window.setTimeout(
@@ -47,7 +53,10 @@ export function GardenStage({
     if (e.pointerType === 'mouse' && e.button !== 0) return;
 
     const targetElement = e.target as HTMLElement;
-    if (targetElement.closest('button') || targetElement.closest('[data-no-plant="true"]')) {
+    if (
+      targetElement.closest('button') ||
+      targetElement.closest('[data-no-plant="true"]')
+    ) {
       return;
     }
 
@@ -65,27 +74,25 @@ export function GardenStage({
     const rawY = ((e.clientY - rect.top) / rect.height) * 100;
 
     const clampedX = Math.max(11, Math.min(89, rawX));
-    const clampedY = Math.max(22, Math.min(86, rawY));
+    const clampedY = Math.max(24, Math.min(86, rawY));
 
     const nextIndex = plantedCount;
     const variant = VARIANTS[nextIndex % VARIANTS.length];
     const colorTheme =
-      FLOWER_COLOR_THEMES[
-        (nextIndex + Math.floor(Math.random() * 2)) % FLOWER_COLOR_THEMES.length
-      ];
+      FLOWER_COLOR_THEMES[nextIndex % FLOWER_COLOR_THEMES.length];
 
-    const depthScale = 0.82 + ((clampedY - 22) / 64) * 0.28;
-    const randomVariation = 0.94 + Math.random() * 0.14;
+    const depthScale = 0.82 + ((clampedY - 24) / 62) * 0.26;
+    const randomVariation = 0.95 + (nextIndex % 3) * 0.04;
 
     const newFlower: PlantedFlower = {
-      id: `flower-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+      id: `lily-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
       xPercent: clampedX,
       yPercent: clampedY,
       variant,
       scale: Number((depthScale * randomVariation).toFixed(2)),
-      rotation: Math.round((Math.random() - 0.5) * 26),
-      stemHeight: Math.round(66 + Math.random() * 24),
-      stemCurve: Math.round((Math.random() - 0.5) * 24),
+      rotation: Math.round((Math.random() - 0.5) * 24),
+      stemHeight: Math.round(66 + Math.random() * 22),
+      stemCurve: Math.round((Math.random() - 0.5) * 22),
       colorTheme,
       createdAt: Date.now(),
     };
@@ -99,7 +106,10 @@ export function GardenStage({
       initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 14 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: shouldReduceMotion ? 0 : -14 }}
-      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      transition={{
+        duration: 0.5,
+        ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+      }}
       aria-label="Interactive Flower Garden"
     >
       <div className="garden-hud-bar" data-no-plant="true">
@@ -138,7 +148,7 @@ export function GardenStage({
         className={`garden-interactive-bed ${isComplete ? 'is-complete' : ''}`}
         onPointerDown={handleGardenPointerDown}
         role="application"
-        aria-label="Tap anywhere in the garden bed to plant up to 20 flowers"
+        aria-label="Tap anywhere in the garden bed to plant up to 20 lily flowers"
       >
         <div className="garden-mist-layer" aria-hidden="true" />
         <div className="garden-ground-curves" aria-hidden="true">
@@ -149,11 +159,11 @@ export function GardenStage({
           >
             <path
               d="M0 120 Q 220 65 450 115 T 800 95 L 800 220 L 0 220 Z"
-              fill="rgba(168, 181, 154, 0.15)"
+              fill="rgba(168, 181, 154, 0.16)"
             />
             <path
               d="M0 155 Q 280 110 540 150 T 800 135 L 800 220 L 0 220 Z"
-              fill="rgba(123, 136, 112, 0.12)"
+              fill="rgba(123, 136, 112, 0.13)"
             />
           </svg>
         </div>
@@ -217,16 +227,19 @@ export function GardenStage({
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{
                   duration: 0.5,
-                  ease: [0.22, 1, 0.36, 1],
+                  ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
                 }}
               >
                 <div className="unlock-emblem" aria-hidden="true">
-                  <svg width="54" height="54" viewBox="0 0 54 54" fill="none">
-                    <circle cx="27" cy="27" r="25" stroke="#7B8870" strokeOpacity="0.4" strokeDasharray="3 4" />
-                    <circle cx="27" cy="27" r="17" fill="rgba(168, 181, 154, 0.2)" />
-                    <path d="M27 12 C23 20 23 34 27 42 C31 34 31 20 27 12 Z" fill="#DFA89B" fillOpacity="0.85" />
-                    <path d="M12 27 C20 23 34 23 42 27 C34 31 20 31 12 27 Z" fill="#A8B59A" fillOpacity="0.85" />
-                    <circle cx="27" cy="27" r="4.5" fill="#D3B77A" />
+                  <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                    <circle cx="28" cy="28" r="26" stroke="#7B8870" strokeOpacity="0.4" strokeDasharray="3 4" />
+                    <circle cx="28" cy="28" r="18" fill="rgba(168, 181, 154, 0.2)" />
+                    <g transform="translate(28, 32) scale(0.45)">
+                      <path d="M0 4 C-12 -10 -15 -28 0 -42 C15 -28 12 -10 0 4 Z" fill="#DFA89B" />
+                      <path d="M0 4 C-12 -10 -15 -28 0 -42 C15 -28 12 -10 0 4 Z" fill="#FFFDF9" transform="rotate(-42)" />
+                      <path d="M0 4 C-12 -10 -15 -28 0 -42 C15 -28 12 -10 0 4 Z" fill="#FFFDF9" transform="rotate(42)" />
+                      <circle cx="0" cy="-4" r="5" fill="#D3B77A" />
+                    </g>
                   </svg>
                 </div>
 
@@ -239,7 +252,7 @@ export function GardenStage({
                 </p>
 
                 <p className="unlock-message">
-                  May your day be filled with beautiful moments, little surprises, and plenty of reasons to smile.
+                  These lilies are a little reflection of your name — so beautiful, graceful, and gentle. I hope you love them, as they were chosen with you in mind.
                 </p>
 
                 <div className="unlock-actions">
