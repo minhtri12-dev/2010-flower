@@ -12,7 +12,7 @@ export interface StageMetadata {
   subtitle: string;
 }
 
-export type FlowerVariant = 'camellia' | 'lotus' | 'cosmos' | 'bellflower';
+export type FlowerVariant = 'lily' | 'lily-bud' | 'lily-open';
 
 export interface FlowerColorTheme {
   id: string;
@@ -45,9 +45,9 @@ export interface WishCardData {
 export const WISH_CARDS: WishCardData[] = [
   {
     id: 'wish-1',
-    title: 'Keep Being You',
-    message: "There's something lovely about the way you see the world. Never lose that.",
-    tag: 'PERSPECTIVE',
+    title: 'Always Love Your Life',
+    message: "Whenever you feel down, try to think positively. The world is always full of small joys waiting for you.",
+    tag: 'GOOD VIBES',
   },
   {
     id: 'wish-2',
@@ -58,53 +58,53 @@ export const WISH_CARDS: WishCardData[] = [
   {
     id: 'wish-3',
     title: 'You Deserve Good Things',
-    message: 'More happy moments, more exciting adventures, and more little things to look forward to.',
+    message: 'More happy moments, more photos with more smiles, and more little things to look forward to.',
     tag: 'EVERYDAY JOY',
   },
 ];
 
 export const SECRET_NOTE_TEXT = `Happy Vietnamese Women's Day! ♡
 
-I know today is a busy day for both of us, so I wanted to make you something a little different.
+I know today is a busy day for you, so I wanted to make you something a little different, and I hope it brings a smile to your face.
 
-It's just a small corner of the internet, filled with flowers, little surprises, and a few wishes for you. I hope it brings a smile to your face, even if just for a moment.
+This is a small corner, filled with flowers, little surprises, and a few wishes for you. I hope it brings a smile to your face, because you look very lovely when you smile.
 
 I hope you always have reasons to be happy, people who appreciate you, and beautiful things waiting around the corner.
 
-And honestly, I'm really glad I got to know you.
+And to be honest, I'm really happy every time I get to go out and watch movies with you.
 
-Have a lovely October 20th. Take good care of yourself, and keep smiling!`;
+Have a lovely October 20th. Remember to eat well, take good care of your health, and always stay happy and joyful ^^`;
 
-export const SECRET_SIGNATURE = 'Made with care, just for you.';
+export const SECRET_SIGNATURE = 'Made with care, just for you, Ly.';
 
 export const FLOWER_COLOR_THEMES: FlowerColorTheme[] = [
   {
-    id: 'dusty-rose',
+    id: 'dusty-rose-lily',
     primary: '#DFA89B',
     secondary: '#FFFDF9',
     core: '#D3B77A',
     glow: 'rgba(223, 168, 155, 0.35)',
   },
   {
-    id: 'sage-ivory',
-    primary: '#A8B59A',
+    id: 'sage-cream-lily',
+    primary: '#F2D6CE',
     secondary: '#FFFDF9',
     core: '#D3B77A',
-    glow: 'rgba(168, 181, 154, 0.35)',
+    glow: 'rgba(242, 214, 206, 0.35)',
   },
   {
-    id: 'honey-cream',
-    primary: '#D3B77A',
-    secondary: '#DFA89B',
-    core: '#7B8870',
-    glow: 'rgba(211, 183, 122, 0.35)',
-  },
-  {
-    id: 'botanical-pink',
+    id: 'peach-gold-lily',
     primary: '#E5B8AE',
-    secondary: '#A8B59A',
+    secondary: '#FFFDF9',
     core: '#D3B77A',
     glow: 'rgba(229, 184, 174, 0.35)',
+  },
+  {
+    id: 'ivory-pure-lily',
+    primary: '#FFFDF9',
+    secondary: '#F2D6CE',
+    core: '#7B8870',
+    glow: 'rgba(255, 253, 249, 0.4)',
   },
 ];
 
@@ -112,7 +112,7 @@ export const GARDEN_STAGES: StageMetadata[] = [
   {
     id: 'welcome',
     stepNumber: '01',
-    label: 'The Welcome',
+    label: 'Welcome',
     subtitle: 'A quiet threshold into the evening garden',
   },
   {
@@ -130,7 +130,7 @@ export const GARDEN_STAGES: StageMetadata[] = [
   {
     id: 'secret-note',
     stepNumber: '04',
-    label: 'The Secret Note',
+    label: 'Secret Note',
     subtitle: 'A sincere message tucked beneath the leaves',
   },
   {

@@ -31,93 +31,60 @@ function PlantedFlowerSvgComponent({ flower, index }: PlantedFlowerSvgProps) {
 
   const swayDuration = 5.2 + (index % 4) * 0.85;
 
-  const renderCorolla = () => {
-    switch (variant) {
-      case 'lotus':
-        return (
-          <g transform={`translate(60, ${headY}) rotate(${rotation})`}>
-            {[-48, -22, 22, 48].map((deg, idx) => (
-              <path
-                key={`back-${idx}`}
-                d="M0 4 C-11 -10 -9 -28 0 -38 C9 -28 11 -10 0 4 Z"
-                fill={colorTheme.secondary}
-                fillOpacity="0.65"
-                transform={`rotate(${deg})`}
-              />
-            ))}
-            {[-34, 0, 34].map((deg, idx) => (
-              <path
-                key={`mid-${idx}`}
-                d="M0 4 C-13 -8 -11 -26 0 -36 C11 -26 13 -8 0 4 Z"
-                fill={`url(#${gradPetalId})`}
-                transform={`rotate(${deg})`}
-              />
-            ))}
-            <path
-              d="M0 6 C-9 -6 -8 -22 0 -31 C8 -22 9 -6 0 6 Z"
-              fill={colorTheme.secondary}
-              fillOpacity="0.95"
-            />
-          </g>
-        );
-
-      case 'cosmos':
-        return (
-          <g transform={`translate(60, ${headY}) rotate(${rotation})`}>
-            {[0, 45, 90, 135, 180, 225, 270, 315].map((deg, idx) => (
-              <path
-                key={`cosmos-${idx}`}
-                d="M0 0 C-8 -10 -10 -26 -3 -32 C0 -30 0 -29 3 -32 C10 -26 8 -10 0 0 Z"
-                fill={idx % 2 === 0 ? `url(#${gradPetalId})` : colorTheme.secondary}
-                fillOpacity={idx % 2 === 0 ? 0.95 : 0.8}
-                transform={`rotate(${deg})`}
-              />
-            ))}
-          </g>
-        );
-
-      case 'bellflower':
-        return (
-          <g transform={`translate(60, ${headY}) rotate(${rotation})`}>
-            {[0, 60, 120, 180, 240, 300].map((deg, idx) => (
-              <path
-                key={`bell-${idx}`}
-                d="M0 2 C-12 -6 -7 -26 0 -34 C7 -26 12 -6 0 2 Z"
-                fill={`url(#${gradPetalId})`}
-                stroke={colorTheme.secondary}
-                strokeOpacity="0.5"
-                strokeWidth="0.6"
-                transform={`rotate(${deg})`}
-              />
-            ))}
-            <circle cx="0" cy="0" r="12" fill={colorTheme.secondary} fillOpacity="0.4" />
-          </g>
-        );
-
-      case 'camellia':
-      default:
-        return (
-          <g transform={`translate(60, ${headY}) rotate(${rotation})`}>
-            {[0, 72, 144, 216, 288].map((deg, idx) => (
-              <path
-                key={`cam-outer-${idx}`}
-                d="M0 2 C-16 -8 -15 -28 0 -32 C15 -28 16 -8 0 2 Z"
-                fill={`url(#${gradPetalId})`}
-                transform={`rotate(${deg})`}
-              />
-            ))}
-            {[36, 108, 180, 252, 324].map((deg, idx) => (
-              <path
-                key={`cam-inner-${idx}`}
-                d="M0 2 C-12 -6 -11 -21 0 -24 C11 -21 12 -6 0 2 Z"
-                fill={colorTheme.secondary}
-                fillOpacity="0.9"
-                transform={`rotate(${deg})`}
-              />
-            ))}
-          </g>
-        );
+  const renderLilyCorolla = () => {
+    if (variant === 'lily-bud') {
+      return (
+        <g transform={`translate(60, ${headY}) rotate(${rotation})`}>
+          <path
+            d="M0 6 C-8 -10 -6 -26 0 -38 C6 -26 8 -10 0 6 Z"
+            fill="#A8B59A"
+            stroke="#7B8870"
+            strokeWidth="1"
+          />
+          <path
+            d="M-3 -2 C-10 -12 -8 -24 0 -34"
+            stroke="#DFA89B"
+            strokeWidth="1.2"
+            fill="none"
+          />
+        </g>
+      );
     }
+
+    return (
+      <g transform={`translate(60, ${headY}) rotate(${rotation})`}>
+        {/* 3 Outer Petals */}
+        {[-42, 0, 42].map((deg, idx) => (
+          <path
+            key={`outer-${idx}`}
+            d="M0 4 C-14 -12 -18 -32 0 -48 C18 -32 14 -12 0 4 Z"
+            fill={colorTheme.secondary}
+            fillOpacity="0.88"
+            stroke={colorTheme.primary}
+            strokeWidth="0.8"
+            transform={`rotate(${deg})`}
+          />
+        ))}
+
+        {/* 3 Inner Petals (Curving gracefully outwards) */}
+        {[-21, 21, 180].map((deg, idx) => (
+          <path
+            key={`inner-${idx}`}
+            d="M0 2 C-11 -10 -14 -28 0 -42 C14 -28 11 -10 0 2 Z"
+            fill={`url(#${gradPetalId})`}
+            transform={`rotate(${deg})`}
+          />
+        ))}
+
+        {/* Long Lily Stamens & Anthers */}
+        {[-25, -12, 0, 12, 25].map((deg, idx) => (
+          <g key={`stamen-${idx}`} transform={`rotate(${deg})`}>
+            <line x1="0" y1="0" x2="0" y2="-26" stroke="#D3B77A" strokeWidth="0.9" />
+            <circle cx="0" cy="-27" r="2" fill="#7B8870" />
+          </g>
+        ))}
+      </g>
+    );
   };
 
   return (
@@ -166,7 +133,7 @@ function PlantedFlowerSvgComponent({ flower, index }: PlantedFlowerSvgProps) {
             <radialGradient id={gradPetalId} cx="50%" cy="35%" r="65%">
               <stop offset="0%" stopColor={colorTheme.secondary} stopOpacity="0.98" />
               <stop offset="60%" stopColor={colorTheme.primary} stopOpacity="0.92" />
-              <stop offset="100%" stopColor="#7B8870" stopOpacity="0.45" />
+              <stop offset="100%" stopColor="#A8B59A" stopOpacity="0.4" />
             </radialGradient>
 
             <linearGradient
@@ -203,6 +170,7 @@ function PlantedFlowerSvgComponent({ flower, index }: PlantedFlowerSvgProps) {
             }}
           />
 
+          {/* Stem */}
           <motion.path
             d={`M 60 145 Q ${controlX} ${midY} 60 ${headY}`}
             stroke={`url(#${gradStemId})`}
@@ -213,14 +181,15 @@ function PlantedFlowerSvgComponent({ flower, index }: PlantedFlowerSvgProps) {
             transition={{ duration: 0.42, ease: 'easeOut' }}
           />
 
+          {/* Lanceolate Leaf Left */}
           <motion.path
-            d={`M 60 ${midY + 10} C 44 ${midY + 6} 36 ${midY - 4} 38 ${midY - 12} C 48 ${midY - 10} 56 ${midY - 1} 60 ${midY + 10} Z`}
+            d={`M 60 ${midY + 12} C 42 ${midY + 6} 30 ${midY - 8} 34 ${midY - 22} C 44 ${midY - 14} 54 ${midY - 2} 60 ${midY + 12} Z`}
             fill="#A8B59A"
-            fillOpacity="0.4"
+            fillOpacity="0.45"
             stroke="#7B8870"
-            strokeOpacity="0.5"
+            strokeOpacity="0.55"
             strokeWidth="0.9"
-            style={{ transformOrigin: `60px ${midY + 10}px` }}
+            style={{ transformOrigin: `60px ${midY + 12}px` }}
             initial={{ scale: shouldReduceMotion ? 1 : 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{
@@ -230,14 +199,15 @@ function PlantedFlowerSvgComponent({ flower, index }: PlantedFlowerSvgProps) {
             }}
           />
 
+          {/* Lanceolate Leaf Right */}
           <motion.path
-            d={`M 60 ${midY + 2} C 76 ${midY - 2} 84 ${midY - 12} 82 ${midY - 20} C 72 ${midY - 18} 64 ${midY - 9} 60 ${midY + 2} Z`}
+            d={`M 60 ${midY + 4} C 78 ${midY - 2} 90 ${midY - 16} 86 ${midY - 30} C 76 ${midY - 22} 66 ${midY - 8} 60 ${midY + 4} Z`}
             fill="#DFA89B"
             fillOpacity="0.35"
             stroke="#7B8870"
-            strokeOpacity="0.5"
+            strokeOpacity="0.55"
             strokeWidth="0.9"
-            style={{ transformOrigin: `60px ${midY + 2}px` }}
+            style={{ transformOrigin: `60px ${midY + 4}px` }}
             initial={{ scale: shouldReduceMotion ? 1 : 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{
@@ -247,6 +217,7 @@ function PlantedFlowerSvgComponent({ flower, index }: PlantedFlowerSvgProps) {
             }}
           />
 
+          {/* Lily Flower Corolla */}
           <motion.g
             style={{ transformOrigin: `60px ${headY}px` }}
             initial={{
@@ -263,17 +234,8 @@ function PlantedFlowerSvgComponent({ flower, index }: PlantedFlowerSvgProps) {
               ease: [0.16, 1, 0.3, 1],
             }}
           >
-            {renderCorolla()}
-            <circle cx="60" cy={headY} r="5.2" fill={`url(#${gradCoreId})`} />
-            <circle
-              cx="60"
-              cy={headY}
-              r="9.5"
-              stroke="#D3B77A"
-              strokeOpacity="0.7"
-              strokeWidth="0.9"
-              strokeDasharray="2 3"
-            />
+            {renderLilyCorolla()}
+            <circle cx="60" cy={headY} r="4.5" fill={`url(#${gradCoreId})`} />
           </motion.g>
         </svg>
       </motion.div>

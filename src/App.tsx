@@ -45,6 +45,11 @@ export function App() {
     });
   }, []);
 
+  const handleResetGarden = useCallback(() => {
+    setPlantedFlowers([]);
+    setCurrentStage('garden');
+  }, []);
+
   return (
     <div className="garden-app">
       <div className="ambient-aura ambient-aura--top" aria-hidden="true" />
@@ -55,7 +60,7 @@ export function App() {
       <header className="garden-header">
         <div className="brand-mark">
           <span className="brand-dot" />
-          <span>Vietnamese Women's Day · 20.10.26</span>
+          <span> HAPPY VIETNAMESE WOMEN'S DAY · 20.10</span>
         </div>
         <div className="stage-indicator-pill">
           {activeStageMeta.stepNumber} / 05 · {activeStageMeta.label}
@@ -95,7 +100,8 @@ export function App() {
           ) : currentStage === 'final-surprise' ? (
             <FinalSurpriseStage
               key="final-surprise"
-              onRestartGarden={() => goToStage('garden')}
+              plantedFlowers={plantedFlowers}
+              onRestartGarden={handleResetGarden}
               onBack={() => goToStage('secret-note')}
             />
           ) : (

@@ -49,9 +49,7 @@ export function WelcomeStage({ onEnterGarden }: WelcomeStageProps) {
         <BotanicalIllustration />
       </motion.div>
 
-      <motion.span className="eyebrow-badge" variants={itemVariants}>
-        OCTOBER 20TH · A LITTLE SURPRISE
-      </motion.span>
+      
 
       <motion.h1 id="welcome-title" className="hero-title" variants={itemVariants}>
         A Little Garden for You

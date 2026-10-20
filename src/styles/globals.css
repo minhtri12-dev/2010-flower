@@ -941,3 +941,34 @@ body {
     scroll-behavior: auto !important;
   }
 }
+.final-bouquet-convergence-frame {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bouquet-svg-canvas {
+  overflow: visible;
+  filter: drop-shadow(0 6px 16px rgba(52, 59, 48, 0.18));
+}
+
+.postcard-toast-badge {
+  position: absolute;
+  bottom: 1.1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-deep-olive);
+  color: #FFFDF9;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  box-shadow: 0 8px 20px rgba(52, 59, 48, 0.2);
+  white-space: nowrap;
+  z-index: 50;
+}

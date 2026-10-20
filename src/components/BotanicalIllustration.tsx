@@ -26,9 +26,9 @@ export function BotanicalIllustration() {
         }}
       >
         <defs>
-          <radialGradient id="journalPetal" cx="50%" cy="40%" r="60%">
-            <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.98" />
-            <stop offset="55%" stopColor="#DFA89B" stopOpacity="0.85" />
+          <radialGradient id="journalLilyPetal" cx="50%" cy="35%" r="65%">
+            <stop offset="0%" stopColor="#FFFDF9" stopOpacity="0.98" />
+            <stop offset="55%" stopColor="#DFA89B" stopOpacity="0.9" />
             <stop offset="100%" stopColor="#A8B59A" stopOpacity="0.4" />
           </radialGradient>
 
@@ -43,29 +43,56 @@ export function BotanicalIllustration() {
           </radialGradient>
         </defs>
 
+        {/* Outer Warm Botanical Halos */}
         <circle cx="80" cy="74" r="54" stroke="#D3B77A" strokeOpacity="0.3" strokeWidth="1" strokeDasharray="3 5" />
         <circle cx="80" cy="74" r="42" stroke="#A8B59A" strokeOpacity="0.25" strokeWidth="1" />
 
+        {/* Stem & Lanceolate Leaves */}
         <path d="M80 92C80 112 79 128 80 146" stroke="url(#stemOlive)" strokeWidth="2" strokeLinecap="round" />
-        <path d="M80 120C68 118 58 110 56 102C66 102 76 108 80 120Z" fill="#A8B59A" fillOpacity="0.4" stroke="#7B8870" strokeOpacity="0.4" strokeWidth="1" />
-        <path d="M80 126C92 124 102 116 104 108C94 108 84 114 80 126Z" fill="#DFA89B" fillOpacity="0.4" stroke="#7B8870" strokeOpacity="0.4" strokeWidth="1" />
+        <path d="M80 118C68 116 54 108 52 98C64 98 74 106 80 118Z" fill="#A8B59A" fillOpacity="0.45" stroke="#7B8870" strokeOpacity="0.4" strokeWidth="0.9" />
+        <path d="M80 124C92 122 106 114 108 104C96 104 86 112 80 124Z" fill="#DFA89B" fillOpacity="0.4" stroke="#7B8870" strokeOpacity="0.4" strokeWidth="0.9" />
 
-        <g>
-          <path d="M80 28C66 42 62 60 80 78C98 60 94 42 80 28Z" fill="url(#journalPetal)" />
-          <path d="M46 44C46 62 58 76 80 78C74 56 62 44 46 44Z" fill="#A8B59A" fillOpacity="0.6" />
-          <path d="M114 44C114 62 102 76 80 78C86 56 98 44 114 44Z" fill="#A8B59A" fillOpacity="0.6" />
-          <path d="M36 68C48 84 64 88 80 78C66 64 50 62 36 68Z" fill="url(#journalPetal)" />
-          <path d="M124 68C112 84 96 88 80 78C94 64 110 62 124 68Z" fill="url(#journalPetal)" />
-          <path d="M80 40C70 54 70 68 80 80C90 68 90 54 80 40Z" fill="#FFFDF9" fillOpacity="0.95" />
+        {/* 6 Characteristic Lily Petals */}
+        <g transform="translate(80, 72)">
+          {/* 3 Outer Petals */}
+          {[-45, 0, 45].map((deg, idx) => (
+            <path
+              key={`welcome-outer-${idx}`}
+              d="M0 6 C-15 -14 -20 -36 0 -54 C20 -36 15 -14 0 6 Z"
+              fill="#FFFDF9"
+              fillOpacity="0.88"
+              stroke="#DFA89B"
+              strokeWidth="0.8"
+              transform={`rotate(${deg})`}
+            />
+          ))}
+
+          {/* 3 Inner Petals */}
+          {[-22, 22, 180].map((deg, idx) => (
+            <path
+              key={`welcome-inner-${idx}`}
+              d="M0 4 C-12 -12 -16 -30 0 -46 C16 -30 12 -12 0 4 Z"
+              fill="url(#journalLilyPetal)"
+              transform={`rotate(${deg})`}
+            />
+          ))}
+
+          {/* Long Stamens & Center Anthers */}
+          {[-28, -14, 0, 14, 28].map((deg, idx) => (
+            <g key={`welcome-stamen-${idx}`} transform={`rotate(${deg})`}>
+              <line x1="0" y1="0" x2="0" y2="-28" stroke="#D3B77A" strokeWidth="0.9" />
+              <circle cx="0" cy="-29" r="2" fill="#7B8870" />
+            </g>
+          ))}
+
+          <circle cx="0" cy="0" r="4.5" fill="url(#coreGold)" />
         </g>
 
-        <circle cx="80" cy="74" r="6" fill="url(#coreGold)" />
-        <circle cx="80" cy="74" r="11" stroke="#D3B77A" strokeOpacity="0.6" strokeWidth="1" />
-
+        {/* Starlight Accents */}
         <circle cx="48" cy="34" r="2" fill="#D3B77A" />
         <circle cx="116" cy="36" r="1.5" fill="#FFFDF9" />
         <circle cx="122" cy="92" r="2" fill="#DFA89B" />
       </motion.svg>
     </div>
   );
-}
+} 
