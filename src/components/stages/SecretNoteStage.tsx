@@ -1,145 +1,245 @@
-import { useState } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { SECRET_NOTE_TEXT, SECRET_SIGNATURE } from '../../types/garden';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { GardenStage as StageEnum, BloomPhase, EchoCardData } from '../types/garden';
+import { EchoCard } from './EchoCard';
+import { WhiteLilySvg } from './WhiteLilySvg';
 
-interface SecretNoteStageProps {
-  onNext: () => void;
-  onBack: () => void;
+interface GardenStageProps {
+  stage: StageEnum;
+  onStageChange: (nextStage: StageEnum) => void;
 }
 
-export function SecretNoteStage({ onNext, onBack }: SecretNoteStageProps) {
-  const shouldReduceMotion = useReducedMotion();
-  const [isOpen, setIsOpen] = useState(false);
+const ECHO_CARDS: EchoCardData[] = [
+  {
+    id: 'gratitude',
+    label: 'GRATITUDE',
+    title: 'Những ngày tháng đã qua',
+    content:
+      'Cảm ơn vì đã có những ngày tháng mà cả hai từng chân thành dành cho nhau. Những cuộc trò chuyện, những buổi đi chơi và những khoảnh khắc giản dị ấy vẫn là một phần đáng quý của quãng đường đã qua.',
+    iconType: 'gratitude',
+  },
+  {
+    id: 'impermanence',
+    label: 'IMPERMANENCE',
+    title: 'Không phải điều đẹp đẽ nào cũng ở lại',
+    content:
+      'Có những điều không đi đến cuối cùng, nhưng vẫn xứng đáng được trân trọng. Đôi khi, chỉ cần biết rằng một khoảng thời gian đã từng khiến mình vui và từng khiến mình chân thành, như thế cũng đủ để nhớ về nó bằng một nụ cười.',
+    iconType: 'impermanence',
+  },
+  {
+    id: 'acceptance',
+    label: 'ACCEPTANCE',
+    title: 'Để mọi điều được bình yên',
+    content:
+      'Không phải cứ còn quý mến là phải tiếp tục đi cùng nhau. Có những lựa chọn cần được tôn trọng, có những con đường cần được để người kia tự bước tiếp. Và có những kỷ niệm, chỉ cần giữ chúng ở một nơi bình yên trong lòng.',
+    iconType: 'acceptance',
+  },
+];
 
-  const paragraphs = SECRET_NOTE_TEXT.split('\n\n');
+export const GardenStage: React.FC<GardenStageProps> = ({
+  stage,
+  onStageChange,
+}) => {
+  const [cardIndex, setCardIndex] = useState(0);
+  const [isTransitioningToBloom, setIsTransitioningToBloom] = useState(false);
+  const [bloomPhase, setBloomPhase] = useState<BloomPhase>('BUD');
+  const [showPrimaryMessage, setShowPrimaryMessage] = useState(false);
+  const [showFinalWish, setShowFinalWish] = useState(false);
+
+  // Điều khiển chuỗi hoạt ảnh 4 giai đoạn khi vào STAGE 03 — THE 20TH BLOOM
+  useEffect(() => {
+    if (stage !== StageEnum.THE_BLOOM) return;
+
+    setBloomPhase('BUD');
+    setShowPrimaryMessage(false);
+    setShowFinalWish(false);
+
+    const t1 = setTimeout(() => setBloomPhase('FIRST_LIGHT'), 1200);
+    const t2 = setTimeout(() => setBloomPhase('BLOOM'), 2900);
+    const t3 = setTimeout(() => setBloomPhase('QUIET_GLOW'), 4800);
+    const t4 = setTimeout(() => setShowPrimaryMessage(true), 5600);
+    const t5 = setTimeout(() => setShowFinalWish(true), 7800);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      clearTimeout(t4);
+      clearTimeout(t5);
+    };
+  }, [stage]);
+
+  const handleNextCard = () => {
+    if (cardIndex < ECHO_CARDS.length - 1) {
+      setCardIndex((prev) => prev + 1);
+    } else {
+      // Tạo khoảng lặng tối dịu trước khi chuyển sang đóa hoa Ly
+      setIsTransitioningToBloom(true);
+      setTimeout(() => {
+        setIsTransitioningToBloom(false);
+        onStageChange(StageEnum.THE_BLOOM);
+      }, 1400);
+    }
+  };
 
   return (
-    <motion.section
-      className="secret-note-shell"
-      initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: shouldReduceMotion ? 0 : -14 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      aria-label="The Secret Note"
-    >
-      <div className="stage-header-block">
-     
-        <h2 className="hero-title" style={{ fontSize: 'clamp(1.85rem, 5vw, 2.6rem)' }}>
-          The Secret Note
-        </h2>
-        <p className="hero-description" style={{ marginBottom: '1.25rem' }}>
-          A sincere message tucked safely beneath the leaves, waiting just for you.
-        </p>
-      </div>
-
-      <div className="envelope-viewport">
-        <AnimatePresence mode="wait">
-          {!isOpen ? (
+    <div className="relative z-10 w-full min-h-screen flex flex-col items-center justify-center px-4 py-16 sm:px-8">
+      <AnimatePresence mode="wait">
+        {/* =========================================================
+            STAGE 01 — THE THRESHOLD
+        ========================================================= */}
+        {stage === StageEnum.THRESHOLD && (
+          <motion.section
+            key="stage-threshold"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, filter: 'blur(8px)', scale: 0.98 }}
+            transition={{ duration: 1.2, ease: 'easeInOut' }}
+            className="max-w-xl w-full flex flex-col items-center text-center"
+          >
+            {/* Nụ hoa Ly trắng hé nhẹ ở trung tâm */}
             <motion.div
-              key="envelope"
-              className="envelope-card"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9, y: -20 }}
-              transition={{ duration: 0.35 }}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.5, delay: 0.2 }}
+              className="mb-2"
             >
-              <div className="envelope-flap-graphic" aria-hidden="true" />
-
-              <div className="envelope-wax-seal">
-                <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-                  <circle cx="18" cy="18" r="17" fill="#7B8870" stroke="#D3B77A" strokeWidth="1.5" />
-                  <path d="M18 9 C15 15 15 21 18 27 C21 21 21 15 18 9 Z" fill="#DFA89B" fillOpacity="0.9" />
-                  <path d="M9 18 C15 15 21 15 27 18 C21 21 15 21 9 18 Z" fill="#A8B59A" fillOpacity="0.9" />
-                  <circle cx="18" cy="18" r="3.5" fill="#D3B77A" />
-                </svg>
-              </div>
-
-              <div className="envelope-text-content">
-                <p className="handwritten-whisper" style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>
-                  for your eyes only...
-                </p>
-                <button
-                  type="button"
-                  className="btn-enter-garden"
-                  onClick={() => setIsOpen(true)}
-                >
-                  <span>Open Your Note</span>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d="M5 12h14" />
-                    <path d="m12 5 7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
+              <WhiteLilySvg phase="BUD" size="small" />
             </motion.div>
-          ) : (
+
+            {/* Tên dự án (Sau một khoảng lặng ngắn) */}
+            <motion.p
+              initial={{ opacity: 0, letterSpacing: '0.2em' }}
+              animate={{ opacity: 0.75, letterSpacing: '0.32em' }}
+              transition={{ duration: 1.4, delay: 1.0 }}
+              className="text-xs sm:text-sm uppercase text-[#FDE68A] font-sans-clean mb-5"
+            >
+              THE QUIET GARDEN OF GRATITUDE
+            </motion.p>
+
+            {/* Thông điệp chính */}
+            <motion.h1
+              initial={{ opacity: 0, y: 10, filter: 'blur(4px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              transition={{ duration: 1.4, delay: 1.6 }}
+              className="font-serif-art italic text-2xl sm:text-4xl text-[#F8FAFC] font-normal leading-relaxed mb-10 px-2"
+            >
+              “Có những đoạn đường không đi đến cuối, nhưng vẫn xứng đáng được nhớ bằng sự dịu dàng.”
+            </motion.h1>
+
+            {/* Nút điều hướng */}
             <motion.div
-              key="letter"
-              className="letter-paper-card"
-              initial={{ opacity: 0, y: 25, scale: 0.96 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, delay: 2.4 }}
             >
-              <div className="letter-inner-scroll">
-                <div className="letter-header-row">
-                  <span className="brand-dot" />
-                  <span className="letter-date-stamp">October 20th · Quiet Reflections</span>
-                </div>
-
-                <div className="letter-body-text">
-                  {paragraphs.map((para, idx) => (
-                    <motion.p
-                      key={idx}
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 + idx * 0.08, duration: 0.45 }}
-                    >
-                      {para}
-                    </motion.p>
-                  ))}
-                </div>
-
-                <motion.div
-                  className="letter-signature-block"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.6, duration: 0.45 }}
-                >
-                  <p className="letter-signoff-handwriting">{SECRET_SIGNATURE}</p>
-                </motion.div>
-              </div>
-
-              <div className="letter-actions-bar">
-                <button
-                  type="button"
-                  className="btn-secondary"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Close Envelope
-                </button>
-                <button
-                  type="button"
-                  className="btn-enter-garden"
-                  onClick={onNext}
-                >
-                  <span>Final Surprise</span>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d="M5 12h14" />
-                    <path d="m12 5 7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
+              <button
+                onClick={() => onStageChange(StageEnum.ECHOES)}
+                className="px-8 py-3 rounded-full font-sans-clean text-sm tracking-wider text-[#F8FAFC] bg-white/[0.04] hover:bg-white/[0.09] border border-white/15 hover:border-[#FDE68A]/50 shadow-[0_0_30px_rgba(253,230,138,0.08)] hover:shadow-[0_0_35px_rgba(253,230,138,0.2)] transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-[#FDE68A]/40"
+              >
+                Bước vào khu vườn
+              </button>
             </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+          </motion.section>
+        )}
 
-      {!isOpen && (
-        <div className="stage-action-row" style={{ marginTop: '0.75rem' }}>
-          <button type="button" className="btn-secondary" onClick={onBack}>
-            Previous
-          </button>
-        </div>
-      )}
-    </motion.section>
+        {/* =========================================================
+            STAGE 02 — THE ECHOES
+        ========================================================= */}
+        {stage === StageEnum.ECHOES && (
+          <motion.section
+            key="stage-echoes"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isTransitioningToBloom ? 0 : 1 }}
+            exit={{ opacity: 0, filter: 'blur(8px)' }}
+            transition={{ duration: 1.1, ease: 'easeInOut' }}
+            className="w-full flex flex-col items-center justify-center"
+          >
+            <div className="mb-6 text-center">
+              <span className="text-[11px] tracking-[0.35em] uppercase text-[#CBD5E1]/50 font-sans-clean">
+                THE ECHOES
+              </span>
+            </div>
+
+            <AnimatePresence mode="wait">
+              {!isTransitioningToBloom && (
+                <EchoCard
+                  key={ECHO_CARDS[cardIndex].id}
+                  card={ECHO_CARDS[cardIndex]}
+                  currentIndex={cardIndex}
+                  total={ECHO_CARDS.length}
+                  onNext={handleNextCard}
+                />
+              )}
+            </AnimatePresence>
+          </motion.section>
+        )}
+
+        {/* =========================================================
+            STAGE 03 — THE 20TH BLOOM
+        ========================================================= */}
+        {stage === StageEnum.THE_BLOOM && (
+          <motion.section
+            key="stage-the-bloom"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.6, ease: 'easeOut' }}
+            className="max-w-2xl w-full flex flex-col items-center text-center"
+          >
+            {/* Nhãn màn hình nghệ thuật */}
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.55 }}
+              transition={{ duration: 1.5, delay: 0.4 }}
+              className="text-[11px] tracking-[0.35em] uppercase text-[#FDE68A] font-sans-clean mb-2"
+            >
+              THE 20TH BLOOM
+            </motion.span>
+
+            {/* Trung tâm thị giác: Đóa hoa Ly trắng nở 4 giai đoạn */}
+            <div className="my-1">
+              <WhiteLilySvg phase={bloomPhase} size="large" />
+            </div>
+
+            {/* Thông điệp sau khi hoa nở hoàn toàn */}
+            <div className="min-h-[150px] flex flex-col items-center justify-start px-3 mt-2">
+              <AnimatePresence>
+                {showPrimaryMessage && (
+                  <motion.p
+                    key="primary-msg"
+                    initial={{ opacity: 0, y: 10, filter: 'blur(4px)' }}
+                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    transition={{ duration: 1.4, ease: 'easeOut' }}
+                    className="font-serif-art text-2xl sm:text-3xl text-[#F8FAFC] font-normal leading-relaxed mb-5"
+                  >
+                    “Trân trọng những gì đã có, và bình yên với những gì không thể tiếp tục.”
+                  </motion.p>
+                )}
+              </AnimatePresence>
+
+              <AnimatePresence>
+                {showFinalWish && (
+                  <motion.div
+                    key="final-wish"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1.6, ease: 'easeOut' }}
+                    className="flex flex-col items-center space-y-6"
+                  >
+                    <p className="font-sans-clean text-sm sm:text-base text-[#CBD5E1]/85 font-light max-w-md leading-relaxed">
+                      Có những điều từ nay sẽ chỉ còn là kỷ niệm, nhưng mình vẫn mong những năm tháng phía trước sẽ dịu dàng với bạn.
+                    </p>
+
+                    <span className="font-serif-art italic text-base sm:text-lg text-[#FDE68A]/80 tracking-wide pt-2">
+                      May life be gentle with you.
+                    </span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </motion.section>
+        )}
+      </AnimatePresence>
+    </div>
   );
-}
+};
