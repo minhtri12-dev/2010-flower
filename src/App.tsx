@@ -6,7 +6,7 @@ type BloomPhase = 'BUD' | 'FIRST_LIGHT' | 'BLOOM' | 'QUIET_GLOW';
 
 interface EchoCardData {
   id: string;
-  label: string;
+  label?: string;
   title: string;
   content: string;
 }
@@ -24,7 +24,7 @@ const ECHO_CARDS: EchoCardData[] = [
     content:
       'Trước mặt mọi người, Trí chưa từng giấu việc mình đang làm quen với Ly — một cô gái xinh đẹp và dịu dàng nhất mà Trí biết. Từ những người bạn đại học, những người bạn ở quê, cho đến những người bạn đá bóng và cả mẹ nữa, Trí chả giấu ai cả. Mẹ Trí và mẹ Ly thì cũng biết nhau, nên là khi Trí nhắc đến Ly thì mẹ cũng thích lắm vì nhà Ly thường hay đi chùa và Ly cũng vậy, như cách mẹ Trí thường làm để cầu nguyện cho gia đình. Trong lòng Trí, ước mong được sớm làm bạn trai của Ly, được khoe với tất cả mọi người, được chăm sóc và đi cạnh Ly chưa từng là một bí mật hay điều gì phải giấu giếm cả.',
   },
-   {
+  {
     id: 'gift',
     title: 'Những món quà của cả 2',
     content:
@@ -57,7 +57,9 @@ class AmbientSoundEngine {
   public start(): void {
     if (this.isPlaying) return;
     try {
-      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      const AudioCtx =
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       this.ctx = new AudioCtx();
       this.masterGain = this.ctx.createGain();
       this.masterGain.gain.setValueAtTime(0.001, this.ctx.currentTime);
@@ -100,7 +102,10 @@ class AmbientSoundEngine {
 
   public cleanup(): void {
     this.oscillators.forEach((o) => {
-      try { o.stop(); o.disconnect(); } catch {}
+      try {
+        o.stop();
+        o.disconnect();
+      } catch {}
     });
     this.oscillators = [];
     if (this.ctx && this.ctx.state !== 'closed') {
@@ -150,11 +155,11 @@ const AmbientCanvas: React.FC = () => {
 
     const render = () => {
       const bgGrad = ctx.createRadialGradient(w / 2, h * 0.4, 20, w / 2, h / 2, Math.max(w, h) * 0.8);
-    bgGrad.addColorStop(0, '#16142a');    // Ánh tím than huyền bí ngay quanh bông hoa
-    bgGrad.addColorStop(0.5, '#0d0d18');  // Chuyển dần sang xanh đen
-    bgGrad.addColorStop(1, '#05050a');    // Đen thẳm ở 4 góc ngoài
-    ctx.fillStyle = bgGrad;
-    ctx.fillRect(0, 0, w, h);
+      bgGrad.addColorStop(0, '#16142a');
+      bgGrad.addColorStop(0.5, '#0d0d18');
+      bgGrad.addColorStop(1, '#05050a');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, w, h);
       particles.forEach((p) => {
         p.phase += p.speed;
         p.x += p.vx + Math.sin(p.phase) * 0.1;
@@ -229,6 +234,7 @@ const SoftRoseLilySvg: React.FC<{ phase: BloomPhase; size?: 'small' | 'large' }>
         transformOrigin: 'bottom center',
         width: dimension.w,
         height: dimension.h,
+        maxWidth: '100%',
         margin: '0 auto',
       }}
     >
@@ -270,59 +276,92 @@ const SoftRoseLilySvg: React.FC<{ phase: BloomPhase; size?: 'small' | 'large' }>
         <path d="M151 285 C180 268, 212 240, 224 205 C202 225, 174 252, 151 270 Z" fill="url(#botanicalStem)" />
         <path d="M144 202 C146 210, 154 210, 156 202 L153 196 L147 196 Z" fill="#33483D" />
 
+        {/* Các cánh hoa bên ngoài */}
         {outerAngles.map((angle, idx) => (
-          <motion.g
-            key={`outer-${idx}`}
-            style={{ transformOrigin: '150px 200px' }}
-            animate={{
-              rotate: isBud ? angle * 0.12 : isFirstLight ? angle * 0.45 : angle,
-              scaleX: isBud ? 0.55 : isFirstLight ? 0.78 : 1,
-              scaleY: isBud ? 0.78 : isFirstLight ? 0.9 : 1,
-            }}
-            transition={{ duration: 1.8, delay: idx * 0.1 }}
-          >
-            <path d="M150 200 C122 172, 114 115, 150 64 C186 115, 178 172, 150 200 Z" fill="url(#roseLilyOuter)" stroke="#FFE4E6" strokeWidth="0.7" />
-            <path d="M150 198 C150 155, 150 115, 150 72" stroke="#FDA4AF" strokeWidth="0.8" opacity="0.6" />
-          </motion.g>
+          <g key={`outer-${idx}`} transform="translate(150, 200)">
+            <motion.g
+              animate={{
+                rotate: isBud ? angle * 0.12 : isFirstLight ? angle * 0.45 : angle,
+                scaleX: isBud ? 0.55 : isFirstLight ? 0.78 : 1,
+                scaleY: isBud ? 0.78 : isFirstLight ? 0.9 : 1,
+              }}
+              transition={{ duration: 1.8, delay: idx * 0.1 }}
+              style={{ transformOrigin: '0 0' }}
+            >
+              <g transform="translate(-150, -200)">
+                <path
+                  d="M150 200 C122 172, 114 115, 150 64 C186 115, 178 172, 150 200 Z"
+                  fill="url(#roseLilyOuter)"
+                  stroke="#FFE4E6"
+                  strokeWidth="0.7"
+                />
+                <path
+                  d="M150 198 C150 155, 150 115, 150 72"
+                  stroke="#FDA4AF"
+                  strokeWidth="0.8"
+                  opacity="0.6"
+                />
+              </g>
+            </motion.g>
+          </g>
         ))}
 
+        {/* Các cánh hoa bên trong */}
         {innerAngles.map((angle, idx) => (
-          <motion.g
-            key={`inner-${idx}`}
-            style={{ transformOrigin: '150px 200px' }}
-            animate={{
-              rotate: isBud ? angle * 0.08 : isFirstLight ? angle * 0.38 : angle,
-              scaleX: isBud ? 0.48 : isFirstLight ? 0.72 : 1,
-              scaleY: isBud ? 0.74 : isFirstLight ? 0.88 : 1.02,
-            }}
-            transition={{ duration: 2.0, delay: 0.15 + idx * 0.08 }}
-          >
-            <path d="M150 200 C118 168, 108 112, 150 58 C192 112, 182 168, 150 200 Z" fill="url(#roseLilyInner)" stroke="#FFF1F2" strokeWidth="0.8" />
-            <path d="M150 196 Q150 135 150 68" stroke="#FDA4AF" strokeWidth="0.7" opacity="0.6" />
-          </motion.g>
+          <g key={`inner-${idx}`} transform="translate(150, 200)">
+            <motion.g
+              animate={{
+                rotate: isBud ? angle * 0.08 : isFirstLight ? angle * 0.38 : angle,
+                scaleX: isBud ? 0.48 : isFirstLight ? 0.72 : 1,
+                scaleY: isBud ? 0.74 : isFirstLight ? 0.88 : 1.02,
+              }}
+              transition={{ duration: 2.0, delay: 0.15 + idx * 0.08 }}
+              style={{ transformOrigin: '0 0' }}
+            >
+              <g transform="translate(-150, -200)">
+                <path
+                  d="M150 200 C118 168, 108 112, 150 58 C192 112, 182 168, 150 200 Z"
+                  fill="url(#roseLilyInner)"
+                  stroke="#FFF1F2"
+                  strokeWidth="0.8"
+                />
+                <path
+                  d="M150 196 Q150 135 150 68"
+                  stroke="#FDA4AF"
+                  strokeWidth="0.7"
+                  opacity="0.6"
+                />
+              </g>
+            </motion.g>
+          </g>
         ))}
 
-        <motion.g
-          animate={{ opacity: isBloom ? 1 : isFirstLight ? 0.35 : 0, scale: isBloom ? 1 : 0.65 }}
-          transition={{ duration: 1.2 }}
-          style={{ transformOrigin: '150px 195px' }}
-        >
-          <path d="M150 196 C150 165, 150 135, 150 108" stroke="#FFE4E6" strokeWidth="1.5" />
-          <circle cx="150" cy="106" r="3" fill="#FDE68A" />
-          {[
-            { cx: 122, cy: 122, cpx: 135, cpy: 160, rot: -25 },
-            { cx: 132, cy: 114, cpx: 140, cpy: 155, rot: -15 },
-            { cx: 141, cy: 110, cpx: 145, cpy: 152, rot: -6 },
-            { cx: 159, cy: 110, cpx: 155, cpy: 152, rot: 6 },
-            { cx: 168, cy: 114, cpx: 160, cpy: 155, rot: 15 },
-            { cx: 178, cy: 122, cpx: 165, cpy: 160, rot: 25 },
-          ].map((s, i) => (
-            <g key={i}>
-              <path d={`M150 196 Q${s.cpx} ${s.cpy} ${s.cx} ${s.cy}`} stroke="#FFF1F2" strokeWidth="0.9" opacity="0.8" />
-              <ellipse cx={s.cx} cy={s.cy} rx="3.8" ry="1.6" transform={`rotate(${s.rot} ${s.cx} ${s.cy})`} fill="#FDE68A" />
+        {/* Nhụy hoa */}
+        <g transform="translate(150, 195)">
+          <motion.g
+            animate={{ opacity: isBloom ? 1 : isFirstLight ? 0.35 : 0, scale: isBloom ? 1 : 0.65 }}
+            transition={{ duration: 1.2 }}
+            style={{ transformOrigin: '0 0' }}
+          >
+            <g transform="translate(-150, -195)">
+              <path d="M150 196 C150 165, 150 135, 150 108" stroke="#FFE4E6" strokeWidth="1.5" />
+              <circle cx="150" cy="106" r="3" fill="#FDE68A" />
+              {[
+                { cx: 122, cy: 122, cpx: 135, cpy: 160, rot: -25 },
+                { cx: 132, cy: 114, cpx: 140, cpy: 155, rot: -15 },
+                { cx: 141, cy: 110, cpx: 145, cpy: 152, rot: -6 },
+                { cx: 159, cy: 110, cpx: 155, cpy: 152, rot: 6 },
+                { cx: 168, cy: 114, cpx: 160, cpy: 155, rot: 15 },
+                { cx: 178, cy: 122, cpx: 165, cpy: 160, rot: 25 },
+              ].map((s, i) => (
+                <g key={i}>
+                  <path d={`M150 196 Q${s.cpx} ${s.cpy} ${s.cx} ${s.cy}`} stroke="#FFF1F2" strokeWidth="0.9" opacity="0.8" />
+                  <ellipse cx={s.cx} cy={s.cy} rx="3.8" ry="1.6" transform={`rotate(${s.rot} ${s.cx} ${s.cy})`} fill="#FDE68A" />
+                </g>
+              ))}
             </g>
-          ))}
-        </motion.g>
+          </motion.g>
+        </g>
 
         {isGlow &&
           goldenMotes.map((m, i) => (
@@ -342,13 +381,183 @@ const SoftRoseLilySvg: React.FC<{ phase: BloomPhase; size?: 'small' | 'large' }>
   );
 };
 
+// Component Màn hình khóa kiểm tra ngày
+const CORRECT_PASS = '22/10/2026';
+
+const PasscodeGate: React.FC<{ onUnlocked: () => void }> = ({ onUnlocked }) => {
+  const [passInput, setPassInput] = useState('');
+  const [error, setError] = useState(false);
+
+  // Tự động thêm dấu / khi người dùng gõ số
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setError(false);
+    let val = e.target.value.replace(/\D/g, '');
+    if (val.length > 8) val = val.slice(0, 8);
+
+    if (val.length >= 5) {
+      val = `${val.slice(0, 2)}/${val.slice(2, 4)}/${val.slice(4)}`;
+    } else if (val.length >= 3) {
+      val = `${val.slice(0, 2)}/${val.slice(2)}`;
+    }
+    setPassInput(val);
+  };
+
+  const handleVerify = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (passInput.trim() === CORRECT_PASS) {
+      localStorage.setItem('memory_unlocked', 'true');
+      onUnlocked();
+    } else {
+      setError(true);
+    }
+  };
+
+  return (
+    <motion.section
+      key="gate"
+      initial={{ opacity: 0, y: 12, filter: 'blur(4px)' }}
+      animate={{
+        opacity: 1,
+        y: 0,
+        filter: 'blur(0px)',
+        x: error ? [-7, 7, -5, 5, -2, 2, 0] : 0,
+      }}
+      exit={{ opacity: 0, scale: 0.96, filter: 'blur(8px)', transition: { duration: 0.7 } }}
+      transition={{ duration: 0.5 }}
+      style={{
+        maxWidth: '400px',
+        width: '100%',
+        margin: 'auto',
+        padding: '2.5rem 1.6rem',
+        borderRadius: '1.5rem',
+        background: 'rgba(255, 255, 255, 0.03)',
+        border: error ? '1px solid rgba(251, 113, 133, 0.45)' : '1px solid rgba(255, 255, 255, 0.08)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        boxShadow: '0 25px 50px rgba(0, 0, 0, 0.45)',
+        textAlign: 'center',
+      }}
+    >
+      <SoftRoseLilySvg phase="BUD" size="small" />
+
+      <p
+        style={{
+          fontSize: '0.68rem',
+          letterSpacing: '0.28em',
+          textTransform: 'uppercase',
+          color: '#FDA4AF',
+          marginTop: '0.8rem',
+          marginBottom: '0.5rem',
+        }}
+      >
+        A SPECIAL DAY
+      </p>
+
+      <h3
+        className="font-serif-art"
+        style={{
+          fontSize: 'clamp(1.25rem, 3vw, 1.5rem)',
+          fontWeight: 400,
+          color: '#F8FAFC',
+          marginBottom: '0.4rem',
+        }}
+      >
+        Vùng Ký Ức
+      </h3>
+
+      <p
+        style={{
+          fontSize: '0.84rem',
+          color: 'rgba(203, 213, 225, 0.75)',
+          marginBottom: '1.6rem',
+          lineHeight: 1.5,
+          fontWeight: 300,
+        }}
+      >
+        Ngày/Tháng/Năm
+      </p>
+
+      <form onSubmit={handleVerify}>
+        <div style={{ position: 'relative', width: '100%', marginBottom: '0.8rem' }}>
+          <input
+            type="text"
+            inputMode="numeric"
+            placeholder="DD / MM / YYYY"
+            value={passInput}
+            onChange={handleInputChange}
+            maxLength={10}
+            autoFocus
+            style={{
+              width: '100%',
+              padding: '0.85rem 1rem',
+              textAlign: 'center',
+              fontSize: '1.15rem',
+              letterSpacing: '0.18em',
+              borderRadius: '9999px',
+              background: 'rgba(255, 255, 255, 0.05)',
+              border: error ? '1px solid #FDA4AF' : '1px solid rgba(255, 255, 255, 0.16)',
+              color: '#F8FAFC',
+              outline: 'none',
+              boxSizing: 'border-box',
+              transition: 'border 0.3s ease',
+            }}
+          />
+        </div>
+
+        {error && (
+          <motion.p
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            style={{
+              fontSize: '0.78rem',
+              color: '#FDA4AF',
+              marginBottom: '1rem',
+              fontWeight: 300,
+            }}
+          >
+            Ngày này chưa đúng rồi...
+          </motion.p>
+        )}
+
+        <button
+          type="submit"
+          style={{
+            width: '100%',
+            padding: '0.75rem',
+            borderRadius: '9999px',
+            fontSize: '0.85rem',
+            letterSpacing: '0.04em',
+            color: '#0B0F19',
+            background: '#FDE68A',
+            border: 'none',
+            fontWeight: 500,
+            cursor: 'pointer',
+            boxShadow: '0 0 20px rgba(253, 230, 138, 0.25)',
+          }}
+        >
+          Mở →
+        </button>
+      </form>
+    </motion.section>
+  );
+};
+
 export function App() {
   const [stage, setStage] = useState<StageType>('THRESHOLD');
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [cardIndex, setCardIndex] = useState(0);
-  const [bloomPhase, setBloomPhase] = useState<BloomPhase>('BUD');
+  const [bloomPhase, setBloomPhase] = useState<BloomPhase>('BLOOM');
   const [showPrimaryMessage, setShowPrimaryMessage] = useState(false);
   const [showFinalWish, setShowFinalWish] = useState(false);
+
+  // Trạng thái đã mở khóa hay chưa (đọc từ localStorage)
+  const [isUnlocked, setIsUnlocked] = useState<boolean>(() => {
+    try {
+      return localStorage.getItem('memory_unlocked') === 'true';
+    } catch {
+      return false;
+    }
+  });
 
   useEffect(() => {
     return () => ambientAudio.cleanup();
@@ -367,7 +576,11 @@ export function App() {
     const t5 = setTimeout(() => setShowFinalWish(true), 7200);
 
     return () => {
-      clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); clearTimeout(t5);
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      clearTimeout(t4);
+      clearTimeout(t5);
     };
   }, [stage]);
 
@@ -394,285 +607,306 @@ export function App() {
       style={{
         position: 'relative',
         minHeight: '100vh',
+        minHeight: '100dvh',
         width: '100%',
         background: 'linear-gradient(180deg, #0B0F19 0%, #11172A 55%, #1E1B4B 100%)',
         color: '#F8FAFC',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
-        padding: '1.5rem 1rem',
+        padding: '2rem 1rem 4.5rem 1rem',
+        overflowY: 'auto',
         overflowX: 'hidden',
+        WebkitOverflowScrolling: 'touch',
       }}
     >
       <AmbientCanvas />
 
-      
-
-      <div style={{ position: 'relative', zIndex: 10, maxWidth: '580px', width: '100%', textAlign: 'center' }}>
+      <div
+        style={{
+          position: 'relative',
+          zIndex: 10,
+          maxWidth: '580px',
+          width: '100%',
+          textAlign: 'center',
+          margin: 'auto 0',
+        }}
+      >
         <AnimatePresence mode="wait">
-          
-          {stage === 'THRESHOLD' && (
-            <motion.section
-              key="threshold"
-              initial={{ opacity: 0, filter: 'blur(4px)' }}
-              animate={{ opacity: 1, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, filter: 'blur(4px)' }}
-              transition={{ duration: 1 }}
-              style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-            >
-              <SoftRoseLilySvg phase="BUD" size="small" />
-
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.75 }}
-                transition={{ duration: 1, delay: 0.4 }}
-                style={{
-                  fontSize: '0.7rem',
-                  letterSpacing: '0.3em',
-                  textTransform: 'uppercase',
-                  color: '#FDA4AF',
-                  marginTop: '0.8rem',
-                  marginBottom: '1rem',
-                }}
-              >
-                JUST FOR YOU 
-              </motion.p>
-
-              <div style={{ marginBottom: '2.25rem', padding: '0 0.5rem' }}>
-                <motion.p
-                  className="font-serif-art"
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 0.8 }}
-                  style={{
-                    fontStyle: 'italic',
-                    fontSize: 'clamp(1.35rem, 3.5vw, 1.8rem)',
-                    fontWeight: 400,
-                    color: '#F8FAFC',
-                    marginBottom: '0.4rem',
-                  }}
+          {!isUnlocked ? (
+            <PasscodeGate key="gate" onUnlocked={() => setIsUnlocked(true)} />
+          ) : (
+            <>
+              {stage === 'THRESHOLD' && (
+                <motion.section
+                  key="threshold"
+                  initial={{ opacity: 0, filter: 'blur(4px)' }}
+                  animate={{ opacity: 1, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, filter: 'blur(4px)' }}
+                  transition={{ duration: 1 }}
+                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
                 >
-                  Thời gian vừa qua, có những lúc bản thân tưởng sẽ có thể cùng nhau..
-                </motion.p>
-                <motion.p
-                  className="font-serif-art"
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 1.4 }}
-                  style={{
-                    fontStyle: 'italic',
-                    fontSize: 'clamp(1.35rem, 3.5vw, 1.8rem)',
-                    fontWeight: 400,
-                    color: '#CBD5E1',
-                  }}
-                >
-                  Nhưng cuối cùng cả 2 vẫn chọn dừng lại với hai chữ bình yên.
-                </motion.p>
-              </div>
+                  <SoftRoseLilySvg phase="BUD" size="small" />
 
-              <motion.button
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 1.8 }}
-                onClick={() => setStage('ECHOES')}
-                style={{
-                  padding: '0.75rem 2rem',
-                  borderRadius: '9999px',
-                  fontSize: '0.85rem',
-                  letterSpacing: '0.05em',
-                  color: '#F8FAFC',
-                  background: 'rgba(255, 255, 255, 0.04)',
-                  border: '1px solid rgba(253, 230, 138, 0.3)',
-                  boxShadow: '0 0 20px rgba(253, 230, 138, 0.08)',
-                  cursor: 'pointer',
-                }}
-              >
-                Words from Within ↓
-              </motion.button>
-            </motion.section>
-          )}
-
-          {stage === 'ECHOES' && (
-            <motion.section
-              key={`echo-${currentCard.id}`}
-              initial={{ opacity: 0, y: 12, filter: 'blur(4px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, y: -10, filter: 'blur(4px)' }}
-              transition={{ duration: 0.7 }}
-              style={{
-                padding: '2.25rem 1.5rem',
-                borderRadius: '1.25rem',
-                background: 'rgba(255, 255, 255, 0.025)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-                backdropFilter: 'blur(12px)',
-                boxShadow: '0 20px 50px rgba(0, 0, 0, 0.4)',
-                textAlign: 'left',
-              }}
-            >
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  fontSize: '0.68rem',
-                  letterSpacing: '0.25em',
-                  color: 'rgba(203, 213, 225, 0.55)',
-                  marginBottom: '1.25rem',
-                }}
-              >
-                <span>0{cardIndex + 1} / 04 — {currentCard.label}</span>
-              </div>
-
-              <h2
-                className="font-serif-art"
-                style={{
-                  fontSize: 'clamp(1.5rem, 3vw, 1.9rem)',
-                  fontWeight: 400,
-                  color: '#F8FAFC',
-                  marginBottom: '1rem',
-                }}
-              >
-                {currentCard.title}
-              </h2>
-
-              <p
-                style={{
-                  fontSize: '0.94rem',
-                  lineHeight: 1.7,
-                  color: 'rgba(203, 213, 225, 0.88)',
-                  fontWeight: 300,
-                  marginBottom: '2rem',
-                }}
-              >
-                {currentCard.content}
-              </p>
-
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <button
-                  onClick={handlePrevCard}
-                  style={{
-                    background: 'transparent',
-                    border: 'none',
-                    color: 'rgba(203, 213, 225, 0.6)',
-                    fontSize: '0.83rem',
-                    cursor: 'pointer',
-                    padding: '0.4rem 0.6rem',
-                  }}
-                >
-                  ← Back
-                </button>
-
-                <button
-                  onClick={handleNextCard}
-                  style={{
-                    padding: '0.65rem 1.6rem',
-                    borderRadius: '9999px',
-                    fontSize: '0.85rem',
-                    color: '#F8FAFC',
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    border: '1px solid rgba(255, 255, 255, 0.15)',
-                    cursor: 'pointer',
-                  }}
-                >
-                  {cardIndex < ECHO_CARDS.length - 1 ? 'Continue →' : 'Final →'}
-                </button>
-              </div>
-            </motion.section>
-          )}
-
-          {stage === 'THE_BLOOM' && (
-            <motion.section
-              key="bloom"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1.2 }}
-              style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-            >
-              <p
-                style={{
-                  fontSize: '0.68rem',
-                  letterSpacing: '0.3em',
-                  color: '#FDA4AF',
-                  opacity: 0.8,
-                  marginBottom: '0.2rem',
-                }}
-              >
-                BÔNG HOA ĐẸP NHẤT
-              </p>
-
-              <SoftRoseLilySvg phase={bloomPhase} size="large" />
-
-              <div style={{ minHeight: '150px', marginTop: '0.5rem', width: '100%' }}>
-                {showPrimaryMessage && (
                   <motion.p
-                    initial={{ opacity: 0, y: 6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1 }}
-                    className="font-serif-art"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 0.75 }}
+                    transition={{ duration: 1, delay: 0.4 }}
                     style={{
-                      fontSize: 'clamp(1.rem, 2.2vw, 1.25rem)',
-                      color: '#F8FAFC',
-                      lineHeight: 1.5,
+                      fontSize: '0.7rem',
+                      letterSpacing: '0.3em',
+                      textTransform: 'uppercase',
+                      color: '#FDA4AF',
+                      marginTop: '0.8rem',
                       marginBottom: '1rem',
-                      padding: '0 0.5rem',
                     }}
                   >
-                    “Đóa hoa này vốn được chuẩn bị cho một khởi đầu mới. Nay nó nở rộ trọn vẹn để khép lại cho những điều đẹp đẽ. Ly biết không, Đây là hoa Lily mà Trí tạo ra, chỉ giành riêng cho cái tên Ly mà thôi. ”
+                    JUST FOR YOU
                   </motion.p>
-                )}
 
-                {showFinalWish && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1.2 }}
-                  >
-                    <p
-                      style={{
-                        fontSize: '0.9rem',
-                        color: 'rgba(203, 213, 225, 0.8)',
-                        fontWeight: 300,
-                        lineHeight: 1.65,
-                        maxWidth: '440px',
-                        margin: '0 auto 0.8rem auto',
-                        padding: '0 0.5rem',
-                      }}
-                    >
-                      Mong rằng những năm tháng sau này, dù đi đến đâu và ở cạnh ai, Ly cũng sẽ luôn được hạnh phúc. Và nếu một ngày nào đó có vào trang web này lại, mong Ly nhớ rằng những khoảnh khắc của cả 2 đẹp đẽ đến nhường nào.
-                    </p>
-                    <p
+                  <div style={{ marginBottom: '2.25rem', padding: '0 0.5rem' }}>
+                    <motion.p
                       className="font-serif-art"
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 1, delay: 0.8 }}
                       style={{
                         fontStyle: 'italic',
-                        fontSize: '1.05rem',
-                        color: 'rgba(253, 230, 138, 0.85)',
-                        marginBottom: '1.5rem',
+                        fontSize: 'clamp(1.35rem, 3.5vw, 1.8rem)',
+                        fontWeight: 400,
+                        color: '#F8FAFC',
+                        marginBottom: '0.4rem',
                       }}
                     >
-                      10/23/26 03.00 AM.
-                    </p>
+                      Thời gian vừa qua, có những lúc bản thân tưởng sẽ có thể cùng nhau..
+                    </motion.p>
+                    <motion.p
+                      className="font-serif-art"
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 1, delay: 1.4 }}
+                      style={{
+                        fontStyle: 'italic',
+                        fontSize: 'clamp(1.35rem, 3.5vw, 1.8rem)',
+                        fontWeight: 400,
+                        color: '#CBD5E1',
+                      }}
+                    >
+                      Nhưng cuối cùng cả 2 vẫn chọn dừng lại với hai chữ bình yên.
+                    </motion.p>
+                  </div>
 
+                  <motion.button
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, delay: 1.8 }}
+                    onClick={() => setStage('ECHOES')}
+                    style={{
+                      padding: '0.75rem 2rem',
+                      borderRadius: '9999px',
+                      fontSize: '0.85rem',
+                      letterSpacing: '0.05em',
+                      color: '#F8FAFC',
+                      background: 'rgba(255, 255, 255, 0.04)',
+                      border: '1px solid rgba(253, 230, 138, 0.3)',
+                      boxShadow: '0 0 20px rgba(253, 230, 138, 0.08)',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    Words from Within ↓
+                  </motion.button>
+                </motion.section>
+              )}
+
+              {stage === 'ECHOES' && (
+                <motion.section
+                  key={`echo-${currentCard.id}`}
+                  initial={{ opacity: 0, y: 12, filter: 'blur(4px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, y: -10, filter: 'blur(4px)' }}
+                  transition={{ duration: 0.7 }}
+                  style={{
+                    padding: '2.25rem 1.5rem',
+                    borderRadius: '1.25rem',
+                    background: 'rgba(255, 255, 255, 0.025)',
+                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                    backdropFilter: 'blur(12px)',
+                    WebkitBackdropFilter: 'blur(12px)',
+                    boxShadow: '0 20px 50px rgba(0, 0, 0, 0.4)',
+                    textAlign: 'left',
+                    width: '100%',
+                  }}
+                >
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      fontSize: '0.68rem',
+                      letterSpacing: '0.25em',
+                      color: 'rgba(203, 213, 225, 0.55)',
+                      marginBottom: '1.25rem',
+                    }}
+                  >
+                    <span>
+                      0{cardIndex + 1} / 04{currentCard.label ? ` — ${currentCard.label}` : ''}
+                    </span>
+                  </div>
+
+                  <h2
+                    className="font-serif-art"
+                    style={{
+                      fontSize: 'clamp(1.5rem, 3vw, 1.9rem)',
+                      fontWeight: 400,
+                      color: '#F8FAFC',
+                      marginBottom: '1rem',
+                    }}
+                  >
+                    {currentCard.title}
+                  </h2>
+
+                  <p
+                    style={{
+                      fontSize: '0.94rem',
+                      lineHeight: 1.7,
+                      color: 'rgba(203, 213, 225, 0.88)',
+                      fontWeight: 300,
+                      marginBottom: '2rem',
+                      whiteSpace: 'pre-line',
+                    }}
+                  >
+                    {currentCard.content}
+                  </p>
+
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <button
-                      onClick={() => { setStage('ECHOES'); setCardIndex(2); }}
+                      onClick={handlePrevCard}
                       style={{
                         background: 'transparent',
                         border: 'none',
-                        color: 'rgba(203, 213, 225, 0.5)',
-                        fontSize: '0.78rem',
-                        letterSpacing: '0.05em',
+                        color: 'rgba(203, 213, 225, 0.6)',
+                        fontSize: '0.83rem',
                         cursor: 'pointer',
-                        padding: '0.4rem',
+                        padding: '0.4rem 0.6rem',
                       }}
                     >
-                      ↺ Back
+                      ← Back
                     </button>
-                  </motion.div>
-                )}
-              </div>
-            </motion.section>
-          )}
 
+                    <button
+                      onClick={handleNextCard}
+                      style={{
+                        padding: '0.65rem 1.6rem',
+                        borderRadius: '9999px',
+                        fontSize: '0.85rem',
+                        color: '#F8FAFC',
+                        background: 'rgba(255, 255, 255, 0.05)',
+                        border: '1px solid rgba(255, 255, 255, 0.15)',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      {cardIndex < ECHO_CARDS.length - 1 ? 'Continue →' : 'Final →'}
+                    </button>
+                  </div>
+                </motion.section>
+              )}
+
+              {stage === 'THE_BLOOM' && (
+                <motion.section
+                  key="bloom"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1.2 }}
+                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}
+                >
+                  <p
+                    style={{
+                      fontSize: '0.68rem',
+                      letterSpacing: '0.3em',
+                      color: '#FDA4AF',
+                      opacity: 0.8,
+                      marginBottom: '0.2rem',
+                    }}
+                  >
+                    BÔNG HOA ĐẸP NHẤT
+                  </p>
+
+                  <SoftRoseLilySvg phase={bloomPhase} size="large" />
+
+                  <div style={{ minHeight: '150px', marginTop: '0.5rem', width: '100%' }}>
+                    {showPrimaryMessage && (
+                      <motion.p
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1 }}
+                        className="font-serif-art"
+                        style={{
+                          fontSize: 'clamp(1rem, 2.2vw, 1.25rem)',
+                          color: '#F8FAFC',
+                          lineHeight: 1.5,
+                          marginBottom: '1rem',
+                          padding: '0 0.5rem',
+                        }}
+                      >
+                        “Đóa hoa này vốn được chuẩn bị cho một khởi đầu mới. Nay nó nở rộ trọn vẹn để khép lại cho những điều đẹp đẽ. Ly biết không, Đây là hoa Lily mà Trí tạo ra, chỉ giành riêng cho cái tên Ly mà thôi. ”
+                      </motion.p>
+                    )}
+
+                    {showFinalWish && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1.2 }}
+                      >
+                        <p
+                          style={{
+                            fontSize: '0.9rem',
+                            color: 'rgba(203, 213, 225, 0.8)',
+                            fontWeight: 300,
+                            lineHeight: 1.65,
+                            maxWidth: '440px',
+                            margin: '0 auto 0.8rem auto',
+                            padding: '0 0.5rem',
+                          }}
+                        >
+                          Mong rằng những năm tháng sau này, dù đi đến đâu và ở cạnh ai, Ly cũng sẽ luôn được hạnh phúc. Và nếu một ngày nào đó có vào trang web này lại, mong Ly nhớ rằng những khoảnh khắc của cả 2 đẹp đẽ đến nhường nào.
+                        </p>
+                        <p
+                          className="font-serif-art"
+                          style={{
+                            fontStyle: 'italic',
+                            fontSize: '1.05rem',
+                            color: 'rgba(253, 230, 138, 0.85)',
+                            marginBottom: '1.5rem',
+                          }}
+                        >
+                          10/23/26 03.00 AM.
+                        </p>
+
+                        <button
+                          onClick={() => {
+                            setStage('ECHOES');
+                            setCardIndex(2);
+                          }}
+                          style={{
+                            background: 'transparent',
+                            border: 'none',
+                            color: 'rgba(203, 213, 225, 0.5)',
+                            fontSize: '0.78rem',
+                            letterSpacing: '0.05em',
+                            cursor: 'pointer',
+                            padding: '0.4rem',
+                          }}
+                        >
+                          ↺ Back
+                        </button>
+                      </motion.div>
+                    )}
+                  </div>
+                </motion.section>
+              )}
+            </>
+          )}
         </AnimatePresence>
       </div>
     </main>

@@ -32,7 +32,7 @@ html,
 body {
   width: 100%;
   height: 100%;
-  overflow: hidden;
+
   background-color: var(--color-ivory-warm);
   color: var(--color-dark-botanical);
   font-family: var(--font-sans);
@@ -48,7 +48,7 @@ body {
   max-width: none;
   text-align: left;
   position: relative;
-  overflow: hidden;
+  
 }
 
 .garden-app {
@@ -62,7 +62,7 @@ body {
     radial-gradient(circle at 50% 15%, rgba(168, 181, 154, 0.18) 0%, transparent 60%),
     radial-gradient(circle at 85% 85%, rgba(223, 168, 155, 0.14) 0%, transparent 50%),
     linear-gradient(180deg, #F7F3EA 0%, #EFEADF 100%);
-  overflow: hidden;
+  
   user-select: none;
 }
 
@@ -155,7 +155,6 @@ body {
 
 .stage-viewport--wide {
   max-width: 1040px;
-  overflow: hidden;
 }
 
 .stage-viewport::-webkit-scrollbar {
@@ -346,7 +345,6 @@ body {
   height: 5px;
   border-radius: 999px;
   background: rgba(168, 181, 154, 0.25);
-  overflow: hidden;
 }
 
 .garden-progress-fill {
@@ -378,7 +376,6 @@ body {
   width: 100%;
   min-height: 380px;
   border-radius: 28px;
-  overflow: hidden;
   cursor: crosshair;
   touch-action: manipulation;
   background:
@@ -746,7 +743,6 @@ body {
   color: var(--color-dark-botanical);
   border: 1px solid var(--border-accent);
   box-shadow: 0 20px 50px rgba(52, 59, 48, 0.12);
-  overflow: hidden;
 }
 
 .letter-inner-scroll {
