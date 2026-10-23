@@ -55,19 +55,20 @@ const CSS = `
 *{box-sizing:border-box}html{min-width:320px;background:var(--night);scroll-behavior:smooth}body{margin:0;min-width:320px;min-height:100vh;background:var(--night);color:var(--silver);font-family:'Manrope',sans-serif;font-weight:300}button,input{font:inherit}button{-webkit-tap-highlight-color:transparent}button:focus-visible,input:focus-visible{outline:2px solid rgba(242,217,154,.9);outline-offset:4px}::selection{background:rgba(242,217,154,.22);color:white}
 .qg-app{position:relative;isolation:isolate;width:100%;min-height:100vh;min-height:100dvh;overflow-x:clip;background:radial-gradient(ellipse at 50% 14%,rgba(66,79,111,.18),transparent 39%),radial-gradient(ellipse at 50% 85%,rgba(40,37,82,.20),transparent 45%),linear-gradient(180deg,#090e18 0%,#111a2a 52%,#171934 100%)}
 .qg-canvas{position:fixed;inset:0;z-index:-1;width:100%;height:100%;pointer-events:none}.qg-atmosphere{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}.qg-moon{position:absolute;left:50%;top:7%;width:min(62vw,700px);aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(218,226,240,.095) 0%,rgba(156,172,198,.035) 34%,transparent 69%);filter:blur(9px)}.qg-ray{position:absolute;top:-24%;left:50%;height:95vh;width:min(16vw,190px);transform:translateX(-50%) rotate(13deg);background:linear-gradient(180deg,rgba(218,226,240,.025),rgba(218,226,240,0));filter:blur(27px);opacity:.8}.qg-horizon-back{position:absolute;inset:auto -5% 0;height:23vh;min-height:130px;background:linear-gradient(180deg,rgba(17,27,42,0),rgba(7,12,20,.76));opacity:.7;clip-path:polygon(0 46%,8% 35%,18% 52%,31% 27%,41% 44%,52% 23%,63% 47%,78% 30%,88% 49%,100% 31%,100% 100%,0 100%)}.qg-horizon-front{position:absolute;inset:auto -5% 0;height:12vh;min-height:75px;background:linear-gradient(180deg,rgba(9,15,24,0),rgba(4,9,15,.95));opacity:.75;clip-path:polygon(0 55%,10% 42%,24% 60%,40% 39%,53% 56%,69% 32%,82% 57%,93% 43%,100% 51%,100% 100%,0 100%)}
-.qg-topbar{position:fixed;z-index:30;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center;pointer-events:none}.qg-topbar>*{pointer-events:auto}.qg-brand{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(226,232,240,.42)}.qg-back{border:1px solid rgba(203,213,225,.19);background:rgba(10,15,25,.45);backdrop-filter:blur(12px);color:rgba(226,232,240,.8);padding:9px 13px;border-radius:999px;cursor:pointer;font-size:11px;transition:all .25s ease}.qg-back:hover{border-color:rgba(242,217,154,.55);color:#fff8e8;background:rgba(255,255,255,.055)}
+.qg-topbar{position:fixed;z-index:30;top:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center;pointer-events:none}.qg-topbar>*{pointer-events:auto}.qg-brand{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(226,232,240,.42)}.qg-back{border:1px solid rgba(203,213,225,.19);background:rgba(10,15,25,.45);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:rgba(226,232,240,.8);padding:9px 13px;border-radius:999px;cursor:pointer;font-size:11px;transition:all .25s ease}.qg-back:hover{border-color:rgba(242,217,154,.55);color:#fff8e8;background:rgba(255,255,255,.055)}
 .qg-shell{position:relative;z-index:1;width:min(100% - 34px,900px);margin:0 auto}.qg-centered{min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:80px 0 48px}.qg-serif{font-family:'Cormorant Garamond',serif;font-weight:400}.qg-eyebrow{font-size:9px;line-height:1.9;letter-spacing:.29em;text-transform:uppercase;color:var(--amber-soft)}
-/* Lock */.qg-lock-panel{position:relative;width:min(100%,460px);padding:28px 24px 30px;text-align:center;border:1px solid rgba(203,213,225,.11);background:linear-gradient(150deg,rgba(255,255,255,.035),rgba(255,255,255,.009));box-shadow:0 30px 100px rgba(0,0,0,.22);overflow:hidden}.qg-lock-panel:before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(242,217,154,.54),transparent)}.qg-lock-flower{width:116px;height:140px;margin:0 auto 10px}.qg-lock-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,5vw,39px);line-height:1.1;letter-spacing:-.025em;font-weight:400;margin:0;color:#f7f7f6}.qg-lock-copy{color:rgba(203,213,225,.65);font-size:12px;line-height:1.9;max-width:300px;margin:14px auto 25px}.qg-datebox{position:relative;width:min(100%,344px);margin:0 auto;border-bottom:1px solid rgba(203,213,225,.3);padding:12px 0 14px;transition:border-color .25s ease,box-shadow .25s ease;cursor:text}.qg-datebox:focus-within{border-color:rgba(242,217,154,.85);box-shadow:0 8px 22px -20px rgba(242,217,154,.8)}.qg-datebox.error{border-color:rgba(227,164,176,.8)}.qg-digits{display:flex;justify-content:center;align-items:center;gap:7px;pointer-events:none}.qg-digit-group{display:flex;gap:4px}.qg-digit{width:29px;height:35px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid rgba(203,213,225,.12);font-family:'Cormorant Garamond',serif;font-size:24px;color:#e5e7eb;transition:color .2s,border-color .2s,text-shadow .2s}.qg-digit.filled{color:#fff4c8;border-color:rgba(242,217,154,.45);text-shadow:0 0 13px rgba(242,217,154,.24)}.qg-separator{font-size:13px;color:rgba(203,213,225,.42)}.qg-hidden-input{position:absolute;inset:0;z-index:2;width:100%;height:100%;opacity:.015;color:transparent;caret-color:transparent;background:transparent;border:0;outline:0}.qg-date-hint{font-size:9px;letter-spacing:.2em;color:rgba(148,163,184,.55);margin:11px 0 0}.qg-lock-feedback{min-height:24px;margin:15px 0 0;font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:rgba(242,217,154,.78)}.qg-lock-feedback.error{color:#e6b8c1}.qg-lock-rule{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:24px}.qg-lock-rule span{height:1px;width:29px;background:rgba(203,213,225,.16)}.qg-lock-rule i{width:4px;height:4px;border-radius:50%;background:var(--amber)}
-/* Welcome */.qg-welcome{text-align:center;padding:35px 0 45px}.qg-welcome-lily{width:172px;margin:0 auto 7px}.qg-welcome-title{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,7vw,70px);line-height:.98;letter-spacing:-.045em;font-weight:400;margin:0 auto 20px;color:#f7f7f6}.qg-welcome-quote{max-width:630px;margin:0 auto;font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3.6vw,31px);line-height:1.55;color:rgba(238,241,247,.84)}.qg-welcome-quote em{display:block;color:rgba(203,213,225,.59);font-style:italic}.qg-primary-btn{display:inline-flex;align-items:center;justify-content:center;gap:13px;margin-top:34px;min-width:205px;padding:13px 22px;border:1px solid rgba(242,217,154,.38);background:rgba(255,255,255,.025);color:#f8fafc;cursor:pointer;font-size:11px;letter-spacing:.05em;transition:all .3s ease}.qg-primary-btn:hover{border-color:rgba(242,217,154,.78);background:rgba(242,217,154,.06);transform:translateY(-2px)}.qg-btn-arrow{color:var(--amber);font-size:16px}
-/* Letter */.qg-progress{position:fixed;z-index:25;top:0;left:0;width:100%;height:2px;background:rgba(203,213,225,.06)}.qg-progress-fill{height:100%;background:linear-gradient(90deg,rgba(203,213,225,.25),rgba(242,217,154,.8));transition:width .15s linear}.qg-letter{width:min(100% - 34px,790px);margin:0 auto;padding:112px 0 95px}.qg-letter-header{text-align:center;max-width:640px;margin:0 auto 74px}.qg-letter-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,7vw,62px);font-weight:400;letter-spacing:-.035em;line-height:1.05;margin:0;color:#f7f7f6}.qg-letter-intro{max-width:500px;margin:19px auto 0;font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;line-height:1.6;color:rgba(203,213,225,.67)}.qg-chapters{position:relative}.qg-chapters:before{content:'';position:absolute;top:9px;bottom:16px;left:23px;width:1px;background:linear-gradient(180deg,transparent,rgba(203,213,225,.2) 7%,rgba(203,213,225,.2) 93%,transparent)}.qg-chapter{position:relative;display:grid;grid-template-columns:48px minmax(0,1fr);gap:22px;margin-bottom:76px}.qg-chapter-marker{position:relative;z-index:1;text-align:center}.qg-chapter-number{width:29px;height:29px;border:1px solid rgba(242,217,154,.32);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:#101725;color:rgba(242,217,154,.9);font-family:'Cormorant Garamond',serif;font-size:13px}.qg-chapter-tag{margin:3px 0 15px;font-size:9px;letter-spacing:.17em;line-height:1.8;color:rgba(242,217,154,.7);text-transform:uppercase}.qg-chapter-title{font-family:'Cormorant Garamond',serif;font-size:clamp(31px,5.4vw,46px);line-height:1.1;letter-spacing:-.025em;color:#f7f7f6;font-weight:400;margin:0}.qg-chapter-subtitle{font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(203,213,225,.57);font-size:18px;line-height:1.6;margin:12px 0 24px}.qg-chapter-divider{height:1px;width:67px;background:linear-gradient(90deg,rgba(242,217,154,.75),transparent);margin-bottom:25px}.qg-paragraph{font-size:13px;line-height:2.15;font-weight:300;letter-spacing:.005em;color:rgba(226,232,240,.77);margin:0 0 20px;overflow-wrap:anywhere}.qg-paragraph:last-of-type{margin-bottom:0}.qg-chapter-flourish{display:flex;align-items:center;gap:10px;margin-top:28px;opacity:.5}.qg-chapter-flourish svg{width:14px;height:14px;stroke:#cbd5e1}.qg-chapter-flourish span{height:1px;width:21px;background:rgba(203,213,225,.5)}.qg-letter-ending{position:relative;text-align:center;margin:8px auto 0;padding-top:52px}.qg-letter-ending:before{content:'';position:absolute;top:0;left:50%;width:1px;height:35px;background:linear-gradient(180deg,rgba(242,217,154,.55),transparent)}.qg-ending-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,4vw,31px);line-height:1.65;font-style:italic;color:rgba(226,232,240,.83);margin:0 auto 28px;max-width:630px}.qg-secondary-btn{border:1px solid rgba(203,213,225,.22);border-radius:999px;background:rgba(255,255,255,.02);color:rgba(248,250,252,.83);padding:12px 20px;cursor:pointer;font-size:11px;letter-spacing:.04em;transition:all .25s ease}.qg-secondary-btn:hover{border-color:rgba(242,217,154,.58);color:#fff7d2;background:rgba(242,217,154,.04)}
-/* Bloom */.qg-bloom-page{width:min(100% - 34px,860px);min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;margin:0 auto;padding:86px 0 65px}.qg-bloom-content{text-align:center;width:100%}.qg-bloom-title{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,6vw,58px);line-height:1.12;letter-spacing:-.035em;font-weight:400;color:#f7f7f6;margin:0}.qg-bloom-kicker{font-size:9px;letter-spacing:.29em;color:rgba(242,217,154,.75);margin:0 0 13px}.qg-lily-stage{position:relative;min-height:355px;display:flex;align-items:center;justify-content:center;margin:4px auto 0}.qg-lily-stage:before{content:'';position:absolute;width:min(75vw,445px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(200,211,230,.065),rgba(200,211,230,.012) 48%,transparent 70%);pointer-events:none}.qg-bloom-copy{position:relative;z-index:2;max-width:680px;margin:0 auto;padding:0 8px}.qg-bloom-primary{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,4vw,32px);line-height:1.65;color:rgba(248,250,252,.94);margin:12px auto 0}.qg-bloom-secondary{max-width:555px;margin:22px auto 0;color:rgba(203,213,225,.73);font-size:12px;line-height:2;font-weight:300}.qg-bloom-signature{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:rgba(242,217,154,.77);margin:29px 0 0}.qg-bloom-date{font-size:9px;letter-spacing:.16em;color:rgba(148,163,184,.48);margin:29px 0 0}.qg-bloom-rule{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:25px;opacity:.55}.qg-bloom-rule span{width:25px;height:1px;background:rgba(203,213,225,.4)}.qg-bloom-rule i{width:4px;height:4px;border-radius:50%;background:var(--amber)}.qg-bloom-back-row{margin-top:30px}.qg-lily{position:relative;flex-shrink:0;width:126px;height:174px;margin:0 auto;filter:drop-shadow(0 0 15px rgba(203,213,225,.055))}.qg-lily.large{width:min(310px,73vw);height:min(430px,101vw);min-height:290px}.qg-lily svg{display:block;width:100%;height:100%;overflow:visible}.qg-lily-fallback-label{position:absolute;left:0;right:0;bottom:-5px;font-size:1px;opacity:0}
-@media(max-width:620px){.qg-topbar{top:12px;left:13px;right:13px}.qg-brand{font-size:8px;letter-spacing:.14em}.qg-shell{width:calc(100% - 28px)}.qg-centered{padding:72px 0 34px}.qg-lock-panel{padding:24px 15px 24px}.qg-lock-flower{transform:scale(.92);margin-top:-7px;margin-bottom:-1px}.qg-datebox{width:100%}.qg-digits{gap:4px}.qg-digit-group{gap:2px}.qg-digit{width:clamp(21px,6.7vw,29px);height:32px;font-size:22px}.qg-letter{width:calc(100% - 28px);padding-top:92px;padding-bottom:70px}.qg-letter-header{margin-bottom:50px}.qg-letter-intro{font-size:19px}.qg-chapters:before{left:14px}.qg-chapter{grid-template-columns:30px minmax(0,1fr);gap:13px;margin-bottom:56px}.qg-chapter-number{width:28px;height:28px;font-size:12px}.qg-chapter-tag{font-size:8px;letter-spacing:.12em}.qg-chapter-title{font-size:clamp(29px,7.6vw,38px)}.qg-chapter-subtitle{font-size:16px;margin:10px 0 20px}.qg-paragraph{font-size:12px;line-height:2.08;margin-bottom:16px}.qg-letter-ending{padding-top:43px}.qg-ending-quote{font-size:23px}.qg-bloom-page{width:calc(100% - 28px);padding-top:80px;padding-bottom:42px}.qg-lily-stage{min-height:290px}.qg-lily.large{width:min(246px,68vw);height:min(341px,94vw);min-height:265px}.qg-bloom-primary{font-size:23px}.qg-bloom-secondary{font-size:12px;line-height:1.95;margin-top:16px}}
+.qg-lock-panel{position:relative;width:min(100%,460px);padding:28px 24px 30px;text-align:center;border:1px solid rgba(203,213,225,.11);background:linear-gradient(150deg,rgba(255,255,255,.035),rgba(255,255,255,.009));box-shadow:0 30px 100px rgba(0,0,0,.22);overflow:hidden}.qg-lock-panel:before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(242,217,154,.54),transparent)}.qg-lock-panel.gate-unlock{box-shadow:0 0 90px rgba(242,217,154,.09),0 28px 90px rgba(0,0,0,.16)}.qg-lock-panel.gate-error{border-color:rgba(210,156,166,.38)}.qg-lock-flower{width:116px;height:140px;margin:0 auto 10px}.qg-lock-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,5vw,39px);line-height:1.1;letter-spacing:-.025em;font-weight:400;margin:0;color:#f7f7f6}.qg-lock-copy{color:rgba(203,213,225,.65);font-size:12px;line-height:1.9;max-width:300px;margin:14px auto 25px}.qg-datebox{position:relative;width:min(100%,344px);margin:0 auto;border-bottom:1px solid rgba(203,213,225,.3);padding:12px 0 14px;transition:border-color .25s ease,box-shadow .25s ease;cursor:text}.qg-datebox:focus-within{border-color:rgba(242,217,154,.85);box-shadow:0 8px 22px -20px rgba(242,217,154,.8)}.qg-datebox.error{border-color:rgba(227,164,176,.8)}.qg-digits{display:flex;justify-content:center;align-items:center;gap:7px;pointer-events:none}.qg-digit-group{display:flex;gap:4px}.qg-digit{width:29px;height:35px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid rgba(203,213,225,.12);font-family:'Cormorant Garamond',serif;font-size:24px;color:#e5e7eb;transition:color .2s,border-color .2s,text-shadow .2s}.qg-digit.filled{color:#fff4c8;border-color:rgba(242,217,154,.45);text-shadow:0 0 13px rgba(242,217,154,.24)}.qg-separator{font-size:13px;color:rgba(203,213,225,.42)}.qg-hidden-input{position:absolute;inset:0;z-index:2;width:100%;height:100%;opacity:.015;color:transparent;caret-color:transparent;background:transparent;border:0;outline:0}.qg-date-hint{font-size:9px;letter-spacing:.2em;color:rgba(148,163,184,.55);margin:11px 0 0}.qg-lock-feedback{min-height:24px;margin:15px 0 0;font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:rgba(242,217,154,.78)}.qg-lock-feedback.error{color:#e6b8c1}.qg-lock-rule{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:24px}.qg-lock-rule span{height:1px;width:29px;background:rgba(203,213,225,.16)}.qg-lock-rule i{width:4px;height:4px;border-radius:50%;background:var(--amber)}
+.qg-welcome{text-align:center;padding:35px 0 45px}.qg-welcome-lily{width:172px;margin:0 auto 7px}.qg-welcome-title{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,7vw,70px);line-height:.98;letter-spacing:-.045em;font-weight:400;margin:0 auto 20px;color:#f7f7f6}.qg-welcome-quote{max-width:630px;margin:0 auto;font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3.6vw,31px);line-height:1.55;color:rgba(238,241,247,.84)}.qg-welcome-quote em{display:block;color:rgba(203,213,225,.59);font-style:italic}.qg-primary-btn{display:inline-flex;align-items:center;justify-content:center;gap:13px;margin-top:34px;min-width:205px;padding:13px 22px;border:1px solid rgba(242,217,154,.38);background:rgba(255,255,255,.025);color:#f8fafc;cursor:pointer;font-size:11px;letter-spacing:.05em;transition:all .3s ease}.qg-primary-btn:hover{border-color:rgba(242,217,154,.78);background:rgba(242,217,154,.06);transform:translateY(-2px)}.qg-btn-arrow{color:var(--amber);font-size:16px}
+.qg-progress{position:fixed;z-index:25;top:0;left:0;width:100%;height:2px;background:rgba(203,213,225,.06)}.qg-progress-fill{height:100%;background:linear-gradient(90deg,rgba(203,213,225,.25),rgba(242,217,154,.8));transition:width .15s linear}.qg-letter{width:min(100% - 34px,790px);margin:0 auto;padding:112px 0 95px}.qg-letter-header{text-align:center;max-width:640px;margin:0 auto 74px}.qg-letter-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,7vw,62px);font-weight:400;letter-spacing:-.035em;line-height:1.05;margin:0;color:#f7f7f6}.qg-letter-intro{max-width:500px;margin:19px auto 0;font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;line-height:1.6;color:rgba(203,213,225,.67)}.qg-chapters{position:relative}.qg-chapters:before{content:'';position:absolute;top:9px;bottom:16px;left:23px;width:1px;background:linear-gradient(180deg,transparent,rgba(203,213,225,.2) 7%,rgba(203,213,225,.2) 93%,transparent)}.qg-chapter{position:relative;display:grid;grid-template-columns:48px minmax(0,1fr);gap:22px;margin-bottom:76px}.qg-chapter-marker{position:relative;z-index:1;text-align:center}.qg-chapter-number{width:29px;height:29px;border:1px solid rgba(242,217,154,.32);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:#101725;color:rgba(242,217,154,.9);font-family:'Cormorant Garamond',serif;font-size:13px}.qg-chapter-tag{margin:3px 0 15px;font-size:9px;letter-spacing:.17em;line-height:1.8;color:rgba(242,217,154,.7);text-transform:uppercase}.qg-chapter-title{font-family:'Cormorant Garamond',serif;font-size:clamp(31px,5.4vw,46px);line-height:1.1;letter-spacing:-.025em;color:#f7f7f6;font-weight:400;margin:0}.qg-chapter-subtitle{font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(203,213,225,.57);font-size:18px;line-height:1.6;margin:12px 0 24px}.qg-chapter-divider{height:1px;width:67px;background:linear-gradient(90deg,rgba(242,217,154,.75),transparent);margin-bottom:25px}.qg-paragraph{font-size:13px;line-height:2.15;font-weight:300;letter-spacing:.005em;color:rgba(226,232,240,.77);margin:0 0 20px;overflow-wrap:anywhere}.qg-paragraph:last-of-type{margin-bottom:0}.qg-chapter-flourish{display:flex;align-items:center;gap:10px;margin-top:28px;opacity:.5}.qg-chapter-flourish svg{width:14px;height:14px;stroke:#cbd5e1}.qg-chapter-flourish span{height:1px;width:21px;background:rgba(203,213,225,.5)}.qg-letter-ending{position:relative;text-align:center;margin:8px auto 0;padding-top:52px}.qg-letter-ending:before{content:'';position:absolute;top:0;left:50%;width:1px;height:35px;background:linear-gradient(180deg,rgba(242,217,154,.55),transparent)}.qg-ending-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,4vw,31px);line-height:1.65;font-style:italic;color:rgba(226,232,240,.83);margin:0 auto 28px;max-width:630px}.qg-secondary-btn{border:1px solid rgba(203,213,225,.22);border-radius:999px;background:rgba(255,255,255,.02);color:rgba(248,250,252,.83);padding:12px 20px;cursor:pointer;font-size:11px;letter-spacing:.04em;transition:all .25s ease}.qg-secondary-btn:hover{border-color:rgba(242,217,154,.58);color:#fff7d2;background:rgba(242,217,154,.04)}
+.qg-bloom-page{width:min(100% - 34px,860px);min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;margin:0 auto;padding:86px 0 65px}.qg-bloom-content{text-align:center;width:100%}.qg-bloom-title{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,6vw,58px);line-height:1.12;letter-spacing:-.035em;font-weight:400;color:#f7f7f6;margin:0}.qg-bloom-kicker{font-size:9px;letter-spacing:.29em;color:rgba(242,217,154,.75);margin:0 0 13px}.qg-lily-stage{position:relative;min-height:355px;display:flex;align-items:center;justify-content:center;margin:4px auto 0}.qg-lily-stage:before{content:'';position:absolute;width:min(75vw,445px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(200,211,230,.065),rgba(200,211,230,.012) 48%,transparent 70%);pointer-events:none}.qg-bloom-copy{position:relative;z-index:2;max-width:680px;margin:0 auto;padding:0 8px}.qg-bloom-primary{font-family:'Cormorant Garamond',serif;font-size:clamp(23px,4vw,32px);line-height:1.65;color:rgba(248,250,252,.94);margin:12px auto 0}.qg-bloom-secondary{max-width:555px;margin:22px auto 0;color:rgba(203,213,225,.73);font-size:12px;line-height:2;font-weight:300}.qg-bloom-signature{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:rgba(242,217,154,.77);margin:29px 0 0}.qg-bloom-date{font-size:9px;letter-spacing:.16em;color:rgba(148,163,184,.48);margin:29px 0 0}.qg-bloom-rule{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:25px;opacity:.55}.qg-bloom-rule span{width:25px;height:1px;background:rgba(203,213,225,.4)}.qg-bloom-rule i{width:4px;height:4px;border-radius:50%;background:var(--amber)}.qg-bloom-back-row{margin-top:30px}
+/* Mobile-safe lily: petals use native SVG transform attributes, not CSS transform-origin. */
+.qg-lily{position:relative;flex-shrink:0;width:126px;height:174px;margin:0 auto;filter:drop-shadow(0 0 15px rgba(203,213,225,.055));overflow:visible}.qg-lily.large{width:min(310px,73vw);height:auto;aspect-ratio:280 / 360;min-height:0}.qg-lily svg{display:block;width:100%;height:100%;overflow:visible}.qg-lily .lily-petal{transform-box:fill-box;transform-origin:center;}.qg-lily .lily-petal-shape{stroke:#fff;stroke-opacity:.72;stroke-width:.8}.qg-lily .lily-petal-vein{stroke:#bdc7d7;stroke-opacity:.45;stroke-width:.85;stroke-linecap:round}
+@media(max-width:620px){.qg-topbar{top:12px;left:13px;right:13px}.qg-shell{width:calc(100% - 28px)}.qg-centered{padding:72px 0 34px}.qg-lock-panel{padding:24px 15px 24px}.qg-lock-flower{transform:scale(.92);margin-top:-7px;margin-bottom:-1px}.qg-datebox{width:100%}.qg-digits{gap:4px}.qg-digit-group{gap:2px}.qg-digit{width:clamp(21px,6.7vw,29px);height:32px;font-size:22px}.qg-welcome{padding-top:25px}.qg-welcome-lily{width:155px}.qg-welcome-title{font-size:clamp(39px,10vw,56px)}.qg-letter{width:calc(100% - 28px);padding-top:92px;padding-bottom:70px}.qg-letter-header{margin-bottom:50px}.qg-letter-intro{font-size:19px}.qg-chapters:before{left:14px}.qg-chapter{grid-template-columns:30px minmax(0,1fr);gap:13px;margin-bottom:56px}.qg-chapter-number{width:28px;height:28px;font-size:12px}.qg-chapter-tag{font-size:8px;letter-spacing:.12em}.qg-chapter-title{font-size:clamp(29px,7.6vw,38px)}.qg-chapter-subtitle{font-size:16px;margin:10px 0 20px}.qg-paragraph{font-size:12px;line-height:2.08;margin-bottom:16px}.qg-letter-ending{padding-top:43px}.qg-ending-quote{font-size:23px}.qg-bloom-page{width:calc(100% - 28px);padding-top:80px;padding-bottom:42px}.qg-lily-stage{min-height:clamp(255px,76vw,320px)}.qg-lily.large{width:min(246px,68vw);height:auto;aspect-ratio:280 / 360;min-height:0}.qg-bloom-primary{font-size:23px}.qg-bloom-secondary{font-size:12px;line-height:1.95;margin-top:16px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 `;
 
 const AmbientCanvas: React.FC<{ reducedMotion: boolean }> = ({ reducedMotion }) => {
   const ref = useRef<HTMLCanvasElement | null>(null);
-
   useEffect(() => {
     const canvas = ref.current;
     const ctx = canvas?.getContext('2d');
@@ -80,7 +81,6 @@ const AmbientCanvas: React.FC<{ reducedMotion: boolean }> = ({ reducedMotion }) 
     const pointer = { x: -1000, y: -1000 };
     const palette = ['#F2D99A', '#E7EDF6', '#B8C7DC'];
     const count = reducedMotion ? 18 : width < 640 ? 32 : 62;
-
     const particles = Array.from({ length: count }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
@@ -103,16 +103,8 @@ const AmbientCanvas: React.FC<{ reducedMotion: boolean }> = ({ reducedMotion }) 
       canvas.style.height = `${height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
-
-    const move = (event: PointerEvent) => {
-      pointer.x = event.clientX;
-      pointer.y = event.clientY;
-    };
-    const leave = () => {
-      pointer.x = -1000;
-      pointer.y = -1000;
-    };
-
+    const move = (event: PointerEvent) => { pointer.x = event.clientX; pointer.y = event.clientY; };
+    const leave = () => { pointer.x = -1000; pointer.y = -1000; };
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
       particles.forEach((p) => {
@@ -124,13 +116,10 @@ const AmbientCanvas: React.FC<{ reducedMotion: boolean }> = ({ reducedMotion }) 
           if (p.x < -15) p.x = width + 15;
           if (p.x > width + 15) p.x = -15;
         }
-
         const dx = p.x - pointer.x;
         const dy = p.y - pointer.y;
         const distance = Math.hypot(dx, dy);
-        const influence = !reducedMotion && distance < 105 && distance > 0
-          ? (105 - distance) / 105 * 4
-          : 0;
+        const influence = !reducedMotion && distance < 105 && distance > 0 ? (105 - distance) / 105 * 4 : 0;
         const x = p.x + (distance ? dx / distance * influence : 0);
         const y = p.y + (distance ? dy / distance * influence : 0);
         const radius = p.radius * 3.5;
@@ -147,18 +136,13 @@ const AmbientCanvas: React.FC<{ reducedMotion: boolean }> = ({ reducedMotion }) 
         ctx.restore();
       });
     };
-
-    const animate = () => {
-      draw();
-      if (!reducedMotion) frame = requestAnimationFrame(animate);
-    };
+    const animate = () => { draw(); if (!reducedMotion) frame = requestAnimationFrame(animate); };
 
     resize();
     animate();
     window.addEventListener('resize', resize);
     window.addEventListener('pointermove', move, { passive: true });
     window.addEventListener('pointerleave', leave);
-
     return () => {
       cancelAnimationFrame(frame);
       window.removeEventListener('resize', resize);
@@ -170,6 +154,14 @@ const AmbientCanvas: React.FC<{ reducedMotion: boolean }> = ({ reducedMotion }) 
   return <canvas ref={ref} className="qg-canvas" aria-hidden="true" />;
 };
 
+/*
+ * Mobile fix:
+ * Previously petals were rotated with CSS transforms using a pixel transform-origin.
+ * On iOS/Safari this origin can be interpreted in CSS pixels rather than viewBox units,
+ * especially when the SVG is resized on a phone. Here every petal's rotation is part of
+ * the native SVG transform attribute, so its hinge stays at (140, 184) at every size.
+ * Bloom is shown by staged opacity and staggered reveals rather than fragile SVG CSS transforms.
+ */
 const WhiteLily: React.FC<{
   phase: BloomPhase;
   size?: 'small' | 'large';
@@ -180,15 +172,18 @@ const WhiteLily: React.FC<{
   const first = phase === 'FIRST_LIGHT';
   const bloom = phase === 'BLOOM' || phase === 'QUIET_GLOW';
   const glow = phase === 'QUIET_GLOW';
-  const open = bud ? 0.18 : first ? 0.56 : 1;
-  const angles = [-62, -38, -14, 14, 38, 62];
+  const openOpacity = bud ? 0 : first ? 0.58 : 1;
+  const petalAngles = [-66, -43, -19, 19, 43, 66];
+  const petalPath = (inner: boolean) => inner
+    ? 'M140 184 C116 160 111 120 140 67 C169 120 164 160 140 184 Z'
+    : 'M140 184 C108 157 96 104 140 43 C184 104 172 157 140 184 Z';
 
   return (
     <motion.div
       className={`qg-lily ${size}`}
       role="img"
       aria-label="A white lily"
-      animate={reducedMotion ? { rotate: 0 } : { rotate: [0, 0.55, 0, -0.55, 0] }}
+      animate={reducedMotion ? { rotate: 0 } : { rotate: [0, 0.45, 0, -0.45, 0] }}
       transition={{ duration: 9, repeat: reducedMotion ? 0 : Infinity, ease: 'easeInOut' }}
     >
       <svg viewBox="0 0 280 360" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -202,12 +197,12 @@ const WhiteLily: React.FC<{
             <stop offset="0" stopColor="#607E68" />
             <stop offset="1" stopColor="#263E34" />
           </linearGradient>
-          <linearGradient id={`${id}-petal`} x1="140" y1="48" x2="140" y2="196" gradientUnits="userSpaceOnUse">
+          <linearGradient id={`${id}-petal`} x1="140" y1="43" x2="140" y2="184" gradientUnits="userSpaceOnUse">
             <stop offset="0" stopColor="#FFFFFF" />
             <stop offset=".54" stopColor="#F2F4F8" />
             <stop offset="1" stopColor="#BBC5D5" />
           </linearGradient>
-          <linearGradient id={`${id}-inner`} x1="140" y1="66" x2="140" y2="193" gradientUnits="userSpaceOnUse">
+          <linearGradient id={`${id}-inner`} x1="140" y1="67" x2="140" y2="184" gradientUnits="userSpaceOnUse">
             <stop offset="0" stopColor="#FFFFFF" />
             <stop offset=".7" stopColor="#F5F6F8" />
             <stop offset="1" stopColor="#D4DAE5" />
@@ -225,84 +220,108 @@ const WhiteLily: React.FC<{
           transition={{ duration: reducedMotion ? 0.1 : 1.8 }}
         />
 
+        {/* Stem and leaves */}
         <path d="M140 184 C138 237 142 284 139 352" stroke={`url(#${id}-stem)`} strokeWidth="2.6" strokeLinecap="round" />
         <path d="M140 278 C112 263 87 241 71 211 C100 228 122 250 140 268 Z" fill={`url(#${id}-stem)`} />
         <path d="M140 305 C164 289 189 264 201 235 C176 250 154 274 140 292 Z" fill={`url(#${id}-stem)`} />
         <path d="M139 236 C119 221 106 202 100 185 C120 201 133 216 139 227 Z" fill="#405F4D" />
 
-        {angles.map((angle, index) => {
+        {/* The closed bud fades away as the open lily is revealed. */}
+        <motion.g
+          initial={false}
+          animate={{ opacity: bud ? 1 : first ? 0.35 : 0 }}
+          transition={{ duration: reducedMotion ? 0.12 : 0.75 }}
+        >
+          <path d="M140 185 C115 158 115 115 140 63 C165 115 165 158 140 185 Z" fill={`url(#${id}-petal)`} stroke="#FFFFFF" strokeWidth=".8" />
+          <path d="M140 181 C130 154 131 113 140 75 C149 113 150 154 140 181 Z" fill={`url(#${id}-inner)`} />
+          <path d="M140 181 Q140 125 140 69" stroke="#C2CAD8" strokeWidth="1" />
+        </motion.g>
+
+        {/*
+          All petals use SVG's own transform attribute (not CSS rotate).
+          This is the key iOS/Safari fix: the rotation pivot uses viewBox units.
+        */}
+        {petalAngles.map((angle, index) => {
           const inner = index % 2 === 1;
-          const path = inner
-            ? 'M140 184 C115 157 112 115 140 68 C168 115 165 157 140 184 Z'
-            : 'M140 184 C108 157 96 103 140 45 C184 103 172 157 140 184 Z';
           return (
-            <motion.path
+            <motion.g
               key={angle}
-              d={path}
-              fill={`url(#${id}-${inner ? 'inner' : 'petal'})`}
-              stroke="#FFFFFF"
-              strokeOpacity=".68"
-              strokeWidth=".8"
-              style={{ transformBox: 'view-box', transformOrigin: '140px 184px' }}
-              animate={{ rotate: angle * (bud ? 0.14 : first ? 0.63 : 1), scaleX: open, scaleY: bud ? 0.86 : 1 }}
-              transition={{ duration: reducedMotion ? 0.12 : 1.9, delay: reducedMotion ? 0 : index * 0.07, ease: [0.22, 0.8, 0.25, 1] }}
-            />
+              transform={`rotate(${angle} 140 184)`}
+              initial={false}
+              animate={{ opacity: openOpacity }}
+              transition={{ duration: reducedMotion ? 0.12 : 0.85, delay: reducedMotion ? 0 : first ? index * 0.055 : index * 0.075 }}
+            >
+              <path
+                d={petalPath(inner)}
+                fill={`url(#${id}-${inner ? 'inner' : 'petal'})`}
+                stroke="#FFFFFF"
+                strokeOpacity=".76"
+                strokeWidth=".8"
+                strokeLinejoin="round"
+              />
+              <path
+                d={inner ? 'M140 178 Q140 126 140 76' : 'M140 178 C138 142 138 93 140 50'}
+                stroke="#C2CAD8"
+                strokeOpacity=".56"
+                strokeWidth=".85"
+                strokeLinecap="round"
+              />
+            </motion.g>
           );
         })}
 
-        {angles.map((angle, index) => (
-          <path
-            key={`vein-${angle}`}
-            d="M140 180 Q140 127 140 54"
-            stroke="#C2CAD8"
-            strokeOpacity={bloom ? '.45' : '.23'}
-            strokeWidth=".85"
-            transform={`rotate(${angle} 140 184)`}
-          />
-        ))}
-
+        {/* Stamens and pistil fade in after the petals begin to open. */}
         <motion.g
-          style={{ transformBox: 'view-box', transformOrigin: '140px 184px' }}
-          animate={{ opacity: bloom ? 1 : first ? 0.45 : 0, scale: bloom ? 1 : 0.65 }}
-          transition={{ duration: reducedMotion ? 0.1 : 1.15 }}
+          initial={false}
+          animate={{ opacity: bloom ? 1 : first ? 0.48 : 0 }}
+          transition={{ duration: reducedMotion ? 0.12 : 1.0, delay: reducedMotion ? 0 : 0.12 }}
         >
+          <path d="M140 183 C139 154 127 132 111 116" stroke="#E3E7EF" strokeWidth="1.15" strokeLinecap="round" />
+          <path d="M140 183 C139 152 135 129 130 108" stroke="#E3E7EF" strokeWidth="1.15" strokeLinecap="round" />
+          <path d="M140 183 C140 153 140 130 140 103" stroke="#F2D99A" strokeWidth="1.45" strokeLinecap="round" />
+          <path d="M140 183 C141 152 145 129 150 108" stroke="#E3E7EF" strokeWidth="1.15" strokeLinecap="round" />
+          <path d="M140 183 C141 154 153 132 169 116" stroke="#E3E7EF" strokeWidth="1.15" strokeLinecap="round" />
+          <path d="M140 183 C141 157 158 139 178 131" stroke="#E3E7EF" strokeWidth="1.15" strokeLinecap="round" />
           {[
-            { x: 102, y: 137, a: -42 },
-            { x: 113, y: 121, a: -26 },
-            { x: 128, y: 111, a: -10 },
-            { x: 152, y: 111, a: 10 },
-            { x: 167, y: 121, a: 26 },
-            { x: 178, y: 137, a: 42 },
+            { x: 111, y: 116, a: -48 },
+            { x: 130, y: 108, a: -13 },
+            { x: 140, y: 103, a: 0 },
+            { x: 150, y: 108, a: 13 },
+            { x: 169, y: 116, a: 48 },
+            { x: 178, y: 131, a: 62 },
           ].map((s) => (
             <g key={`${s.x}-${s.y}`}>
-              <path d={`M140 184 Q${(140 + s.x) / 2} ${(184 + s.y) / 2 + 7} ${s.x} ${s.y}`} stroke="#F1F3F7" strokeWidth="1.2" strokeLinecap="round" />
-              <ellipse cx={s.x} cy={s.y} rx="4.3" ry="1.8" transform={`rotate(${s.a} ${s.x} ${s.y})`} fill="#F2D99A" />
-              <circle cx={s.x} cy={s.y} r="1.2" fill="#FFF8D8" />
+              <ellipse cx={s.x} cy={s.y} rx="4.2" ry="1.8" transform={`rotate(${s.a} ${s.x} ${s.y})`} fill="#F2D99A" />
+              <circle cx={s.x} cy={s.y} r="1.15" fill="#FFF8D8" />
             </g>
           ))}
-          <path d="M140 183 C139 155 140 131 140 108" stroke="#F2D99A" strokeWidth="1.4" strokeLinecap="round" />
-          <circle cx="140" cy="106" r="2.7" fill="#FFF4C8" />
         </motion.g>
 
-        {glow && (
-          <g>
-            {Array.from({ length: 15 }, (_, i) => {
-              const angle = (Math.PI * 2 * i) / 15;
-              const x = 140 + Math.cos(angle) * (37 + (i % 3) * 5);
-              const y = 132 + Math.sin(angle) * (28 + (i % 4) * 4);
-              return (
-                <motion.circle
-                  key={i}
-                  cx="140" cy="132" r={i % 4 === 0 ? 2.1 : 1.25}
-                  fill={`url(#${id}-pollen)`}
-                  initial={{ opacity: 0, x: 0, y: 0 }}
-                  animate={reducedMotion ? { opacity: 0.35, x: 0, y: 0 } : { opacity: [0, 0.95, 0], x: x - 140, y: y - 132 }}
-                  transition={{ duration: reducedMotion ? 0.15 : 3.5, delay: reducedMotion ? 0 : i * 0.09, repeat: reducedMotion ? 0 : Infinity, repeatDelay: 1.1, ease: 'easeOut' }}
-                />
-              );
-            })}
-          </g>
-        )}
+        {/* Soft pollen motes around the open flower. */}
+        <motion.g
+          initial={false}
+          animate={{ opacity: glow ? 1 : 0 }}
+          transition={{ duration: reducedMotion ? 0.1 : 0.8 }}
+        >
+          {Array.from({ length: 16 }, (_, i) => {
+            const angle = (Math.PI * 2 * i) / 16;
+            const distance = 32 + (i % 4) * 9;
+            const dx = Math.cos(angle) * distance;
+            const dy = Math.sin(angle) * distance * 0.82;
+            return (
+              <motion.circle
+                key={i}
+                cx="140" cy="133" r={i % 4 === 0 ? 2.1 : 1.2}
+                fill={`url(#${id}-pollen)`}
+                initial={{ opacity: 0, x: 0, y: 0 }}
+                animate={glow && !reducedMotion
+                  ? { opacity: [0, 0.95, 0], x: dx, y: dy }
+                  : { opacity: glow ? 0.38 : 0, x: 0, y: 0 }}
+                transition={{ duration: reducedMotion ? 0.1 : 3.2, delay: reducedMotion ? 0 : i * 0.075, repeat: glow && !reducedMotion ? Infinity : 0, repeatDelay: 1.2, ease: 'easeOut' }}
+              />
+            );
+          })}
+        </motion.g>
       </svg>
     </motion.div>
   );
@@ -358,32 +377,15 @@ const DateLock: React.FC<{ reducedMotion: boolean; onSuccess: () => void }> = ({
       exit={reducedMotion ? { opacity: 0 } : { opacity: 0, scale: 0.98, filter: 'blur(8px)' }}
       transition={{ duration: reducedMotion ? 0.15 : 0.8 }}
     >
-      <div className="qg-lock-flower">
-        <WhiteLily phase={unlocking ? 'QUIET_GLOW' : 'BUD'} size="small" reducedMotion={reducedMotion} />
-      </div>
+      <div className="qg-lock-flower"><WhiteLily phase={unlocking ? 'QUIET_GLOW' : 'BUD'} size="small" reducedMotion={reducedMotion} /></div>
       <p className="qg-eyebrow" style={{ margin: '4px 0 9px' }}>A DATE HELD IN MEMORY</p>
       <h1 className="qg-lock-title">Vùng Ký Ức</h1>
-      
 
       <div className={`qg-datebox ${error ? 'error' : ''}`} onClick={() => inputRef.current?.focus()}>
         <div className="qg-digits" aria-hidden="true">
           {digitGroup(0, 2)}<span className="qg-separator">/</span>{digitGroup(2, 2)}<span className="qg-separator">/</span>{digitGroup(4, 4)}
         </div>
-        <input
-          ref={inputRef}
-          className="qg-hidden-input"
-          type="text"
-          inputMode="numeric"
-          autoComplete="off"
-          autoCapitalize="off"
-          spellCheck={false}
-          maxLength={8}
-          value={digits}
-          onChange={handleChange}
-          aria-label="Nhập ngày tháng năm gồm tám chữ số"
-          disabled={unlocking}
-          autoFocus
-        />
+        <input ref={inputRef} className="qg-hidden-input" type="text" inputMode="numeric" autoComplete="off" autoCapitalize="off" spellCheck={false} maxLength={8} value={digits} onChange={handleChange} aria-label="Nhập ngày tháng năm gồm tám chữ số" disabled={unlocking} autoFocus />
       </div>
       <p className="qg-date-hint">DD / MM / YYYY</p>
       <AnimatePresence mode="wait">
@@ -398,7 +400,6 @@ const DateLock: React.FC<{ reducedMotion: boolean; onSuccess: () => void }> = ({
 
 export function App() {
   const reduced = Boolean(useReducedMotion());
-  // Always start at the date lock. No localStorage persistence, so refresh shows the lock again.
   const [stage, setStage] = useState<Stage>('LOCK');
   const [bloomPhase, setBloomPhase] = useState<BloomPhase>('BUD');
   const [showPrimary, setShowPrimary] = useState(false);
@@ -443,7 +444,6 @@ export function App() {
       setReadingProgress(0);
       return;
     }
-
     const update = () => {
       const height = document.documentElement.scrollHeight - window.innerHeight;
       setReadingProgress(height <= 0 ? 100 : Math.max(0, Math.min(100, (window.scrollY / height) * 100)));
@@ -457,19 +457,10 @@ export function App() {
     };
   }, [stage]);
 
-  useEffect(() => {
-    if (stage !== 'ECHOES' || !readerEndRef.current) return;
-    if (window.history.state?.returnToLetterEnd) {
-      window.history.replaceState({}, '');
-      window.setTimeout(() => {
-        readerEndRef.current?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
-      }, reduced ? 0 : 120);
-    }
-  }, [stage, reduced]);
-
   const showLetter = (toEnd = false) => {
-    if (toEnd) window.history.replaceState({ returnToLetterEnd: true }, '');
-    else window.history.replaceState({}, '');
+    if (toEnd) {
+      window.setTimeout(() => readerEndRef.current?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' }), reduced ? 0 : 100);
+    }
     setStage('ECHOES');
     if (!toEnd) window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
   };
@@ -487,20 +478,13 @@ export function App() {
   return (
     <main className="qg-app">
       <style>{CSS}</style>
-      <div className="qg-atmosphere" aria-hidden="true">
-        <div className="qg-moon" /><div className="qg-ray" /><div className="qg-horizon-back" /><div className="qg-horizon-front" />
-      </div>
+      <div className="qg-atmosphere" aria-hidden="true"><div className="qg-moon" /><div className="qg-ray" /><div className="qg-horizon-back" /><div className="qg-horizon-front" /></div>
       <AmbientCanvas reducedMotion={reduced} />
 
       {stage !== 'LOCK' && (
         <header className="qg-topbar">
-          
-          {stage === 'BLOOM' && (
-            <button className="qg-back" type="button" onClick={() => showLetter(true)}>← Return the letter</button>
-          )}
-          {stage === 'ECHOES' && (
-            <button className="qg-back" type="button" onClick={goBackToThreshold}>← First page</button>
-          )}
+          {stage === 'BLOOM' && <button className="qg-back" type="button" onClick={() => showLetter(true)}>← Return the letter</button>}
+          {stage === 'ECHOES' && <button className="qg-back" type="button" onClick={goBackToThreshold}>← First page</button>}
         </header>
       )}
 
@@ -535,13 +519,12 @@ export function App() {
                 <motion.p className="qg-letter-intro" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: reduced ? 0 : 0.2, duration: 0.9 }}>Không phải để níu giữ, chỉ để trân trọng những điều đẹp đẽ đã trải qua.</motion.p>
               </header>
               <div className="qg-chapters">
-                {chapters.map((chapter, index) => (
+                {chapters.map((chapter) => (
                   <motion.section key={chapter.number} className="qg-chapter" initial={reduced ? { opacity: 0 } : { opacity: 0, y: 20, filter: 'blur(4px)' }} whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: reduced ? 0.15 : 0.8 }}>
                     <div className="qg-chapter-marker"><span className="qg-chapter-number">{chapter.number}</span></div>
                     <div>
                       <p className="qg-chapter-tag">{chapter.tag}</p>
                       <h2 className="qg-chapter-title">{chapter.title}</h2>
-                      <p className="qg-chapter-subtitle">{chapter.subtitle}</p>
                       <div className="qg-chapter-divider" />
                       {chapter.paragraphs.map((paragraph, pIndex) => (
                         <motion.p key={pIndex} className="qg-paragraph" initial={reduced ? { opacity: 0 } : { opacity: 0, y: 5 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: reduced ? 0.15 : 0.65, delay: reduced ? 0 : pIndex * 0.06 }}>{paragraph}</motion.p>
@@ -553,7 +536,7 @@ export function App() {
               </div>
               <motion.footer ref={readerEndRef} className="qg-letter-ending" initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: reduced ? 0.15 : 0.9 }}>
                 <p className="qg-ending-quote">“Thật ra, thích em không nằm trong kế hoạch của anh.<br />Cũng giống như việc phải quên em, đó là điều anh chưa từng chuẩn bị.”</p>
-                <button className="qg-secondary-btn" type="button" onClick={() => { setStage('BLOOM'); window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' }); }}>Final →</button>
+                <button className="qg-secondary-btn" type="button" onClick={showBloom}>Final →</button>
               </motion.footer>
             </div>
           </motion.div>
@@ -573,7 +556,9 @@ export function App() {
                     <p className="qg-bloom-signature">May life be gentle with you.</p>
                     <p className="qg-bloom-date">23 10 26 · 03:00 AM</p>
                     <div className="qg-bloom-rule" aria-hidden="true"><span /><i /><span /></div>
-                    
+                    <div className="qg-bloom-back-row">
+                      <button className="qg-secondary-btn" type="button" onClick={() => showLetter(true)}>← Return the letter</button>
+                    </div>
                   </motion.div>}
                 </AnimatePresence>
               </div>
