@@ -14,7 +14,7 @@ const chapters = [
     paragraphs: [
       'Quen biết Ly thông qua em Đông, vô tình 2 anh em trò chuyện vui vẻ trên Facebook thì có nhắc đến Ly, em Đông cứ kêu " anh thử làm quen xem, chị Ly hiền lắm. Cũng có nhiều người ưng chị nhưng mà chị chưa chịu ai đâu "  và vẫn nhớ như in cái ngày 26 tháng 5, ngày mà cả 2 bắt đầu trò chuyện và tìm hiểu.',
       'Từ Facebook, Instagram đến Locket, Ly đều chấp nhận lời mời kết bạn rất nhanh, hai người cũng bắt đầu nhắn nhiều hơn và kể nhau nghe những câu chuyện thường ngày. Khoảng thời gian đó thì Trí cũng rất muốn đi chơi với Ly nhưng do kẹt học Toeic nên Ly bảo là khi nào Trí học xong thì chúng ta gặp, cảm ơn Ly vì đã đợi Trí trong khoảng thời gian đó.',
-      'Khoảnh khắc lần đầu gặp Ly thì Trí đã rung động rồi, tuy dáng người nhỏ nhắn nhưng Ly rất xinh và dịu dàng. Đó là lần đầu Trí có cảm giác rung động một người ngay lúc mới gặp. Cảm ơn Ly rất nhiều vì đã cho Trí biết được cảm giác như thế nó đẹp đẽ nhường nào.',
+      'Khoảnh khắc lần đầu gặp Ly thì Trí đã rung động rồi, tuy dáng người nhỏ nhắn nhưng Ly rất xinh và dịu dàng. Đó là lần đầu Trí có cảm giác rung động một người ngay lúc mới gặp. Cảm ơn Ly rất nhiều vì đã cho Trí biết được cảm giác đó nó đẹp đẽ nhường nào.',
     ],
   },
   {
@@ -32,9 +32,9 @@ const chapters = [
     tag: 'THINGS WORTH KEEPING',
     title: 'Những món quà của cả 2 ',
     paragraphs: [
-      'Cảm ơn Ly đã tặng Trí chiếc áo sơ mi rất đẹp và khung hình có tấm ảnh Messi mà Trí rất thích. Trí biết những món quà này không phải lựa nhanh cho xong, đó là sự tìm hiểu và tỉ mỉ cả và Trí rất biết ơn về điều đó.',
+      'Cảm ơn Ly đã tặng Trí chiếc áo sơ mi rất đẹp và khung hình có tấm ảnh Messi mà Trí rất thích, cả 2 món đó đều được Trí giữ gìn sạch sẽ và cẩn thận. Trí biết những món quà này không phải lựa nhanh cho xong, đó là sự tìm hiểu và tỉ mỉ cả và Trí rất biết ơn về điều đó.',
       'Hộp nến thơm Ly tặng cho Trí, đến giờ Trí vẫn chưa dám dùng, Trí gói lại và đặt trên bàn để mùi hương không bay đi. Dù gì, thì Trí sẽ không dùng món quà này tại vì những kỉ niệm mà Ly tặng Trí luôn giữ bên mình, không bao giờ để nó mất hay trầy xước đâu. Cảm ơn Ly đã mua bánh cho Trí lúc Trí ở quê nha, những món quà và sự chăm chút nhỏ của Ly Trí đều không quên đâu hehe.',
-      'Mấy món quà Trí tặng Ly, Trí đều tìm hiểu rất kĩ đó nha, cái áo màu hồng đó phù hợp với Ly lắm, hôm qua Ly mặc thật sự xinh lắm đó, không cần phải lộng lẫy nhưng vẫn toát ra vibe công chúa ˆˆ, cả vòng tay mà Trí tặng cho Ly nữa, dù chúng ta không còn liên lạc nhưng Ly nhớ hãy mang những thứ ấy thường xuyên nhá, vì những món quà Trí lựa chọn tuy không mắc tiền nhưng sẽ rất hợp với Ly lắm.',
+      'Mấy món quà Trí tặng Ly, Trí đều tìm hiểu rất kĩ đó nha, cái áo màu hồng đó phù hợp với Ly lắm, hôm qua Ly mặc thật sự xinh lắm đó, không cần phải lộng lẫy nhưng vẫn toát ra vibe công chúa ˆˆ, cả vòng tay mà Trí tặng cho Ly nữa, dù chúng ta không còn liên lạc nhưng Ly nhớ hãy xem những món ấy như đồ dùng thường xuyên của mình nhá, vì những món quà Trí lựa chọn tuy không mắc tiền nhưng sẽ rất hợp với Ly lắm.',
     ],
   },
   {
@@ -42,8 +42,8 @@ const chapters = [
     tag: 'A QUIET GOODBYE',
     title: 'Những lời chúc tốt đẹp giành cho Ly',
     paragraphs: [
-      'Nhưng tình yêu mà, nó phải đến từ 2 phía chứ, đúng không? Thời gian vừa qua, Trí đã cố gắng làm những gì có thể để ghi điểm trong mắt Ly. Ly không nói hôm nay đi làm mệt nhưng Trí luôn biết cảm giác khối lượng công việc mà Ly làm hằng ngày. Thế nên Trí đã ngỏ ý để đặt trà sữa hoặc thức uống khác cho Ly, để Ly có năng lượng hơn trong lúc làm việc. Món quà tuy nhỏ nhưng có thể giúp ít cho Ly để Ly làm việc hiệu quả hơn.',
-      'Trí rất muốn hỏi thăm và chăm sóc Ly tận tình hơn, nhưng không biết Ly có nhìn lại mỗi khi Ly nhắn tin cọc không? Trí nhận được những câu đó thì có cảm giác đượm buồn lắm và Trí cũng biết là tính cách của Ly đó giờ vậy, hơi " nhạt " nhưng ở ngoài thì nói chuyện khá vui và dễ gần, vì vậy Trí cũng hiểu. Nhưng sau cái ngày 3/9 ấy, mọi thứ có lẽ vẫn không thay đổi, bản thân Trí cũng đã biết sẽ có ngày hôm nay. Lần này có thể Trí ít buồn hơn, nhưng những kỉ niệm thì sẽ còn rất lâu để quên được đó, Ly biết không? Lần này chắc sẽ không còn cơ hội để quay lại nữa rồi, vì cảm xúc của Ly có lẽ cũng đã đến giới hạn.',
+      'Nhưng tình cảm mà, nó phải đến từ 2 phía chứ, đúng không? Thời gian vừa qua, Trí đã cố gắng làm những gì có thể để ghi điểm trong mắt Ly. Ly không nói hôm nay đi làm mệt nhưng Trí luôn biết cảm giác khối lượng công việc mà Ly làm hằng ngày. Thế nên Trí đã ngỏ ý để đặt trà sữa hoặc thức uống khác cho Ly, để Ly có năng lượng hơn trong lúc làm việc. Món quà tuy nhỏ nhưng có thể giúp ít cho Ly để Ly làm việc hiệu quả hơn.',
+      'Trí rất muốn hỏi thăm và chăm sóc Ly tận tình hơn, nhưng không biết Ly có nhìn lại mỗi khi Ly nhắn tin cọc không? Trí nhận được những câu đó thì có cảm giác đượm buồn lắm và Trí cũng biết là tính cách của Ly đó giờ vậy, hơi " nhạt " nhưng ở ngoài thì nói chuyện khá vui và dễ gần, vì vậy Trí cũng hiểu. Nhưng sau cái ngày 3/9 ấy, mọi thứ có lẽ vẫn không thay đổi, bản thân Trí cũng đã biết sẽ có ngày hôm nay. Lần này có thể Trí ít buồn hơn, nhưng những kỉ niệm thì sẽ còn rất lâu để quên được đó, Ly biết không? Lần này chắc sẽ không còn khả năng để quay lại nữa rồi, vì cảm xúc của Ly có lẽ cũng đã cạn kiệt.',
       'Cảm ơn Ly vì đã nói ra những điều thật lòng để Trí có thể ngừng chờ đợi một câu trả lời khác. Trí tôn trọng lựa chọn của Ly và mong những năm tháng phía trước sẽ mang đến cho Ly nhiều niềm vui, sự bình yên và một người thật sự phù hợp với điều Ly mong muốn. Đừng cảm thấy có lỗi khi nói ra những lời đó nữa, hạnh phúc của em là do em chọn mà. ',
     ],
   },
@@ -379,7 +379,7 @@ const DateLock: React.FC<{ reducedMotion: boolean; onSuccess: () => void }> = ({
     >
       <div className="qg-lock-flower"><WhiteLily phase={unlocking ? 'QUIET_GLOW' : 'BUD'} size="small" reducedMotion={reducedMotion} /></div>
       <p className="qg-eyebrow" style={{ margin: '4px 0 9px' }}>A DATE HELD IN MEMORY</p>
-      <h1 className="qg-lock-title">Vùng Ký Ức</h1>
+      <h1 className="qg-lock-title">Những Kỷ Niệm Đẹp</h1>
 
       <div className={`qg-datebox ${error ? 'error' : ''}`} onClick={() => inputRef.current?.focus()}>
         <div className="qg-digits" aria-hidden="true">
@@ -390,7 +390,7 @@ const DateLock: React.FC<{ reducedMotion: boolean; onSuccess: () => void }> = ({
       <p className="qg-date-hint">DD / MM / YYYY</p>
       <AnimatePresence mode="wait">
         <motion.p key={error ? 'error' : unlocking ? 'success' : 'idle'} className={`qg-lock-feedback ${error ? 'error' : ''}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-          {error ? 'Ngày mà cả hai quyết định...' : unlocking ? 'Những dòng tâm sự của bản thân.' : 'Nhập ngày để tiếp tục'}
+          {error ? 'Sai ngày rồi...' : unlocking ? 'Những dòng tâm sự của bản thân.' : 'Nhập ngày để tiếp tục'}
         </motion.p>
       </AnimatePresence>
       <div className="qg-lock-rule"><span /><i /><span /></div>
@@ -552,13 +552,11 @@ export function App() {
                 </AnimatePresence>
                 <AnimatePresence>
                   {showFinal && <motion.div initial={reduced ? { opacity: 0 } : { opacity: 0, y: 8, filter: 'blur(5px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} transition={{ duration: reduced ? 0.15 : 1.2 }}>
-                    <p className="qg-bloom-secondary">Mong rằng những năm tháng phía trước sẽ dịu dàng với Ly,  Nếu một ngày tình cờ Ly tìm được pass và vào được nơi này, mong Ly sẽ nhớ về nó như là một kỉ niệm đẹp của cả hai. Cuối cùng, Trí cũng có thể những chữ này ở nơi đây thôi, " Anh thật sự yêu em lắm, Bùi Yến Ly. "</p>
+                    <p className="qg-bloom-secondary">Mong rằng những năm tháng phía trước sẽ dịu dàng với Ly,  Nếu một ngày tình cờ Ly tìm được pass và vào được nơi này, mong Ly sẽ nhớ về nó như là một kỉ niệm đẹp của cả hai. Cuối cùng, Trí cũng có thể nói những dòng chữ này ở nơi đây thôi, " Anh thật sự yêu em lắm, Bùi Yến Ly. "</p>
                     <p className="qg-bloom-signature">May life be gentle with you.</p>
                     <p className="qg-bloom-date">23 10 26 · 03:00 AM</p>
                     <div className="qg-bloom-rule" aria-hidden="true"><span /><i /><span /></div>
-                    <div className="qg-bloom-back-row">
-                      <button className="qg-secondary-btn" type="button" onClick={() => showLetter(true)}>← Return the letter</button>
-                    </div>
+                    
                   </motion.div>}
                 </AnimatePresence>
               </div>
