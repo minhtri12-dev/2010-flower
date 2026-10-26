@@ -145,11 +145,30 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--rose);outline-o
 
 .vk-bloom-page{position:relative;z-index:2;width:min(calc(100% - 30px),820px);min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;margin:0 auto;padding:72px 0 35px}
 .vk-bloom-card{position:relative;width:100%;padding:clamp(24px,5vw,46px) clamp(18px,5vw,52px);text-align:center;background:var(--paper);background-image:radial-gradient(ellipse at 10% 5%,#ffffffb3,transparent 43%);border:1px solid #6f4f5333;box-shadow:0 28px 62px #3e2a2f2e}
-.vk-bloom-title{font-family:'Cormorant Garamond',serif;font-size:clamp(35px,6vw,52px);line-height:1.13;font-weight:500;color:#2b201c;margin:0}
+.vk-bloom-title{
+  position: relative;
+  z-index: 3;
+  transform: translateY(-6px);
+  margin: 0 0 8px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(35px, 6vw, 52px);
+  line-height: 1.13;
+  font-weight: 500;
+  color: #2b201c;
+}
 .vk-bloom-kicker{font-size:9px;letter-spacing:.22em;color:#9a6c55;margin:0 0 9px}
 .vk-lily-stage{position:relative;min-height:clamp(330px,54vw,480px);display:flex;align-items:center;justify-content:center;margin:0 auto;overflow:visible}
 .vk-lily-stage:before{content:'';position:absolute;width:min(75vw,390px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#c4a9824d,#c4a98217 48%,transparent 70%);pointer-events:none}
-.vk-bouquet{position:relative;z-index:1;flex-shrink:0;width:min(440px,91vw);height:auto;overflow:visible;filter:drop-shadow(0 13px 12px #69513a20)}
+.vk-bouquet{
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  width: min(440px, 91vw);
+  height: auto;
+  overflow: visible;
+  transform: translateY(22px);
+  filter: drop-shadow(0 13px 12px #69513a20);
+}
 .vk-bouquet svg{display:block;width:100%;height:auto;overflow:visible}
 .vk-bloom-copy{position:relative;z-index:2;max-width:680px;margin:0 auto;padding:0 8px}
 .vk-bloom-primary{font-family:Lora,serif;font-size:clamp(16px,2vw,19px);line-height:1.85;font-style:italic;color:#35231f;margin:12px auto 0}
@@ -224,7 +243,11 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--rose);outline-o
   .vk-ending-quote{font-size:15px;line-height:1.8}
   .vk-bloom-page{width:calc(100% - 18px);padding:60px 0 24px}
   .vk-bloom-card{padding:22px 15px}
-  .vk-bloom-title{font-size:clamp(34px,9vw,45px)}
+  .vk-bloom-title{
+  font-size: clamp(35px, 6vw, 52px);
+  transform: translateY(-6px);
+  margin-bottom: 8px;
+}
   .vk-lily-stage{min-height:clamp(300px,84vw,380px)}
   .vk-bouquet{width:min(390px,94vw)}
   .vk-bloom-primary{font-size:15px;line-height:1.8}
@@ -644,7 +667,7 @@ export default function App() {
                 scrollTop();
               }}
             >
-              ← Quay lại
+              ← Back
             </button>
           )}
         </div>
@@ -683,7 +706,7 @@ export default function App() {
             <div className={`vk-lock-card ${opening ? 'is-opening' : ''}`}>
               <div className="vk-lock-seal" aria-hidden="true">✿</div>
               <p className="vk-eyebrow" style={{ margin: '0 0 5px' }}>
-                A LETTER KEPT IN SILENCE
+                A LETTER KEPT SECRET
               </p>
               <h1 className="vk-lock-title">Vùng Ký Ức</h1>
               <p className="vk-lock-copy">
@@ -856,7 +879,7 @@ export default function App() {
                           type="button"
                           onClick={() => turnPage(chapterIndex - 1)}
                         >
-                          ← Trang trước
+                          ← Previous
                         </button>
                       )}
 
@@ -866,7 +889,7 @@ export default function App() {
                           type="button"
                           onClick={() => turnPage(chapterIndex + 1)}
                         >
-                          Trang tiếp →
+                          Next →
                         </button>
                       )}
                     </div>
@@ -905,7 +928,7 @@ export default function App() {
                       transition={{ duration: reduced ? 0.12 : 1 }}
                     >
                       <p className="vk-bloom-primary">
-                        “Đóa hoa này vốn được chuẩn bị cho một khởi đầu mới. Nay nó nở rộ trọn vẹn để khép lại cho những điều đẹp đẽ. Ly biết không, Đây là hoa Lily mà Trí tạo ra, chỉ giành riêng cho cái tên Ly mà thôi.”
+                        “Boá hoa này vốn được chuẩn bị cho một khởi đầu mới. Nay nó nở rộ trọn vẹn để khép lại cho những điều đẹp đẽ. Ly biết không, Đây là hoa Lily mà Trí tạo ra, chỉ giành riêng cho cái tên Ly mà thôi.”
                       </p>
 
                       <p className="vk-bloom-secondary">
@@ -930,7 +953,7 @@ export default function App() {
                             scrollTop();
                           }}
                         >
-                          Mở sổ lưu niệm →
+                          Memorable photos →
                         </button>
                       </div>
                     </motion.div>
@@ -955,7 +978,7 @@ export default function App() {
                 <p className="vk-eyebrow" style={{ margin: '0 0 7px' }}>
                   A LITTLE BOOK OF MEMORIES
                 </p>
-                <h1 className="vk-album-title">Những ngày tháng đã qua</h1>
+                <h1 className="vk-album-title">Những kỷ niệm đẹp</h1>
                 <p className="vk-album-subtitle">A few moments worth keeping.</p>
               </header>
 
